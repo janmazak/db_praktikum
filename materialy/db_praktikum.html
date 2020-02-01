@@ -1,11 +1,9 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+﻿<!DOCTYPE html>
+<html lang="sk">
 
 <head>
 	<title>Praktické cvičenia z databáz</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-	<meta http-equiv="Content-Style-Type" content="text/css"/>
 	<link rel="stylesheet" href="rjasko.css"/>
 </head>
 <body style="background-repeat:no-repeat;background-position:top right;">
@@ -16,6 +14,29 @@
 Ján Mazák, M255, mazak at dcs.fmph.uniba.sk<br/>
 Michal Rjaško, rjasko at dcs.fmph.uniba.sk<br/>
 
+<hr>
+<h2>Hodnotenie</h2>
+
+<p>Za každú z 3 domácich úloh je max. 30 bodov.</p>
+
+<p>Ďalšie body sa získavajú za riešenie úloh jednotlivých cvičení: za každé cvičenie 0 alebo 1 bod. Z bodov udeľovaných za jednotlivé cvičenia je potrebné na úspešné absolvovanie predmetu získať aspoň 9.</p>
+
+<p>
+Do 3 dní po každom cvičení treba riešenia odoslať e-mailom na adresu mazak (zavinac) dcs.fmph.uniba.sk. 
+Následne budú riešenia zbežne zhodnotené: v prípade dostatočnosti bude udelený 1 bod, v prípade nedostatočnosti bude študent vyzvaný riešenie doplniť (ak odovzdal aspoň niečo zmysluplné), na čo má ďalšie 3 dni, a potom dostane definitívne hodnotenie.
+Nie je potrebné riešiť všetky úlohy; kritérium je mať (aspoň ako-tak správne) vyriešenú približne tretinu úloh.
+</p>
+
+
+
+<ul>
+    <li>A --- 90 a viac bodov</li>
+    <li>B --- 80 až 89 bodov</li>
+    <li>C --- 70 až 79 bodov</li>
+    <li>D --- 60 až 69 bodov</li>
+    <li>E --- 50 až 59 bodov</li>
+    <li>Fx --- menej ako 50 bodov</li>
+</ul>
 
 <!--
 <h3>Domáce ulohy</h3>
@@ -36,40 +57,45 @@ Michal Rjaško, rjasko at dcs.fmph.uniba.sk<br/>
 </ul>
 -->
 
+<hr>
+<h3>Cvičenie 12</h3> 
 
-<h3>Cvičenie 12 (18.12.2019)</h3> 
-<h4>EXPLAIN: query planner</h4>
-
-Some useful links:
+<h4>Query planner (EXPLAIN / ANALYZE)</h4>
 <ul>
-    <li><a href="http://www.postgresql.org/docs/9.4/static/using-explain.html">http://www.postgresql.org/docs/9.4/static/using-explain.html</a>
-    <li><a href="http://www.postgresql.org/docs/9.2/static/sql-explain.html">http://www.postgresql.org/docs/9.2/static/sql-explain.html</a>
-    <li><a href="http://www.postgresql.org/docs/9.4/static/planner-optimizer.html">http://www.postgresql.org/docs/9.4/static/planner-optimizer.html</a>
-    <li><a href="http://www.postgresql.org/docs/9.4/static/explicit-joins.html">http://www.postgresql.org/docs/9.4/static/explicit-joins.html</a>
-    <li><a href="http://blog.heapanalytics.com/postgresqls-powerful-new-join-type-lateral/">http://blog.heapanalytics.com/postgresqls-powerful-new-join-type-lateral/</a>
-</ul>
-
-<ol>
+    <li>Napriek tomu, že dotazy sa formulujú v deklaratívnych jazykoch (nevieme špecifikovať postup výpočtu), možno sa relačnej databázy opýtať, aký postup bol zvolený. Toto dáva zmysel najmä v prípadoch, keď je výpočet dotazu podstatne pomalší, než by sme očakávali. Zapamätajte si však raz a navždy: v prvom rade sa vždy snažíme o <b><i>vysokú rýchlosť pochopenia zápisu dotazu ľudmi, až potom nás zaujíma rýchlosť výpočtu</i></b> (a aj to zvyčajne len pri dotazoch, ktoré sú kritické, napr. sa vykonávajú veľmi často).
+    <blockquote><i><a href="https://stackify.com/premature-optimization-evil/">Premature optimization is the root of all evil. (D. Knuth)</a></i></blockquote>
+    (Aby sme však príliš nezjednodušovali, pozrite si tiež <a href="http://www.joshbarczak.com/blog/?p=580">jeden</a> či <a href="https://dl.acm.org/doi/pdf/10.1145/1569886.1513451?download=true">dva</a> ďalšie pohľady.)
+    </li>
+    <li>Systém PostgreSQL a tiež niektoré iné umožňujú sledovať plán a rýchlosť výpočtu dotazu pomocou príkazov EXPLAIN a ANALYZE.
+        <ul>
+            <li><a href="http://www.postgresql.org/docs/9.4/static/using-explain.html">http://www.postgresql.org/docs/9.4/static/using-explain.html</a>
+            <li><a href="http://www.postgresql.org/docs/9.2/static/sql-explain.html">http://www.postgresql.org/docs/9.2/static/sql-explain.html</a>
+            <li><a href="http://www.postgresql.org/docs/9.4/static/planner-optimizer.html">http://www.postgresql.org/docs/9.4/static/planner-optimizer.html</a>
+            <li><a href="http://www.postgresql.org/docs/9.4/static/explicit-joins.html">http://www.postgresql.org/docs/9.4/static/explicit-joins.html</a>
+            <li><a href="http://blog.heapanalytics.com/postgresqls-powerful-new-join-type-lateral/">http://blog.heapanalytics.com/postgresqls-powerful-new-join-type-lateral/</a>
+        </ul>
+    </li>
+    <li>Plánovač dotazov (query planner) kladie primárny dôraz na diskové operácie. Podkladom pre jeho prácu je množstvo dát v jednotlivých tabuľkách a spôsob uloženia dát na disku. Databáza si tieto údaje uchováva v pomocných tabuľkách, ktoré nereflektujú okamžitý stav, ale len jeho aproximáciu (ak by sme ich updatovali zakaždým, neúmerne by sa natiahol čas pre príkazy INSERT, UPDATE a DELETE). Tieto údaje získame takto: <pre>SELECT relpages, reltuples FROM pg_class WHERE relname = 'ab';</pre>
+    </li>
     <li>
-        <p>Stiahnite si na server cvika súbor <a href="http://www.dcs.fmph.uniba.sk/~mazak/vyucba/db_praktikum/explain.sql"><b>explain.sql</b></a> (cp -r /home/rjasko1/db12 ~; cd ~/db12) a spusťte <b>psql -f explain.sql</b>.
-        Potom spusťte <b>psql</b>, postupne vykonávajte nasledujúce príkazy a analyzujte plány, ktoré vytvoril plánovač. Skúste pochopiť, prečo bol daný plán zvolený. Prvý z nasledujúcich príkazov vám umožní zistiť, koľko blokov na disku a koľko riadkov sa v danej relácii (v našom prípade ab) nachádza.</p>
+        Stiahnite si na server cvika súbor <a href="12/explain.sql"><b>explain.sql</b></a> (napr. pomocou wget) a spusťte <b>psql -f explain.sql</b>.
+        Potom spusťte <b>psql</b>, postupne vykonávajte nasledujúce príkazy a analyzujte plány, ktoré vytvoril plánovač. Skúste pochopiť, prečo bol daný plán zvolený.
         <pre><code>
-SELECT relpages, reltuples FROM pg_class WHERE relname = 'ab';
-explain analyze select * from ab;
-explain analyze select * from ab where b > 4 order by b;
-explain analyze select * from ab where b = 4 order by b;
-create index i1 on ab (b);
-explain analyze select * from ab where b > 4 order by b;
-explain analyze select * from ab where b = 4 order by b;
-create index i1h on ab using hash(b);
-explain analyze select * from ab where b > 4 order by b;
-explain analyze select * from ab where b = 4 order by b;
+    explain analyze select * from ab;
+    explain analyze select * from ab where b > 4 order by b;
+    explain analyze select * from ab where b = 4 order by b;
+    create index i1 on ab (b);
+    explain analyze select * from ab where b > 4 order by b;
+    explain analyze select * from ab where b = 4 order by b;
+    create index i1h on ab using hash(b);
+    explain analyze select * from ab where b > 4 order by b;
+    explain analyze select * from ab where b = 4 order by b;
         </code></pre>
         <p>Vykonajte posledný príkaz desaťkrát po sebe a sledujte, ako sa mení reálny spotrebovaný čas.</p>
         <pre><code>        
-explain select * from ab, bc;
-insert into bc select x.id, x.id + 1 from generate_series(1, 1000000) as x(id);
-explain select * from ab, bc;
+    explain select * from ab, bc;
+    insert into bc select x.id, x.id + 1 from generate_series(1, 1000000) as x(id);
+    explain select * from ab, bc;
         </code></pre>                
         <p>Pozor, ak v poslednom príkaze použijete aj <code>analyze</code>, bude to trvať veľmi dlho (koľko riadkov by malo byť vo výsledku?).</p>
     </li>
@@ -77,33 +103,33 @@ explain select * from ab, bc;
     <li>
         <p>Spusťte <b>psql -f explain.sql</b> a analyzujte plány, ktoré vytvorí plánovač pri nasledujúcich príkazoch.</p>
         <pre><code>
-explain select * from ab, bc where ab.b = bc.b;
-explain select * from ab, bc where ab.b < bc.b;
-explain select * from ab, bc where ab.b = bc.b order by ab.b;
-explain select * from ab, bc where ab.b < bc.b order by ab.b;
-create index i1 on ab (b);
-explain select * from ab, bc where ab.b = bc.b;
-explain select * from ab, bc where ab.b < bc.b;
-explain select * from ab, bc where ab.b = bc.b order by ab.b;
-explain select * from ab, bc where ab.b < bc.b order by ab.b;
-create index i2 on bc (b);
-explain select * from ab, bc where ab.b = bc.b;
-explain select * from ab, bc where ab.b < bc.b;
-explain select * from ab, bc where ab.b = bc.b order by ab.b;
-explain select * from ab, bc where ab.b < bc.b order by ab.b;
-insert into bc select x.id, x.id + 1 from generate_series(1, 1000000) as x(id);
-insert into bc select x.id, x.id + 1 from generate_series(1, 1000000) as x(id);
-insert into bc select x.id, x.id + 1 from generate_series(1, 1000000) as x(id);
-explain select * from ab, bc where ab.b < bc.b order by ab.b;
-explain analyze select * from ab, bc where ab.b = bc.b order by ab.b;
-drop index i2;
-create index i22 on bc (b, c);
-explain analyze select * from ab, bc where ab.b = bc.b order by ab.b;
-create index i1h on ab using hash(b);
-create index i2h on bc using hash(b);
-explain select * from ab, bc where ab.b = bc.b;
-explain select * from ab, bc where ab.b < bc.b;
-explain select * from ab, bc where ab.b = bc.b order by ab.b;
+    explain select * from ab, bc where ab.b = bc.b;
+    explain select * from ab, bc where ab.b &lt; bc.b;
+    explain select * from ab, bc where ab.b = bc.b order by ab.b;
+    explain select * from ab, bc where ab.b &lt; bc.b order by ab.b;
+    create index i1 on ab (b);
+    explain select * from ab, bc where ab.b = bc.b;
+    explain select * from ab, bc where ab.b &lt; bc.b;
+    explain select * from ab, bc where ab.b = bc.b order by ab.b;
+    explain select * from ab, bc where ab.b &lt; bc.b order by ab.b;
+    create index i2 on bc (b);
+    explain select * from ab, bc where ab.b = bc.b;
+    explain select * from ab, bc where ab.b &lt; bc.b;
+    explain select * from ab, bc where ab.b = bc.b order by ab.b;
+    explain select * from ab, bc where ab.b &lt; bc.b order by ab.b;
+    insert into bc select x.id, x.id + 1 from generate_series(1, 1000000) as x(id);
+    insert into bc select x.id, x.id + 1 from generate_series(1, 1000000) as x(id);
+    insert into bc select x.id, x.id + 1 from generate_series(1, 1000000) as x(id);
+    explain select * from ab, bc where ab.b &lt; bc.b order by ab.b;
+    explain analyze select * from ab, bc where ab.b = bc.b order by ab.b;
+    drop index i2;
+    create index i22 on bc (b, c);
+    explain analyze select * from ab, bc where ab.b = bc.b order by ab.b;
+    create index i1h on ab using hash(b);
+    create index i2h on bc using hash(b);
+    explain select * from ab, bc where ab.b = bc.b;
+    explain select * from ab, bc where ab.b &lt; bc.b;
+    explain select * from ab, bc where ab.b = bc.b order by ab.b;
         </code></pre>
         <p>Všimnite si, ako "čas" vypočítaný plánovačom rastie, ak index obsahuje nepotrebné stĺpce.</p>
     </li>
@@ -111,286 +137,263 @@ explain select * from ab, bc where ab.b = bc.b order by ab.b;
     <li>
         <p>Spusťte <b>psql -f explain.sql</b> a analyzujte plány, ktoré vytvorí plánovač pri nasledujúcich príkazoch.</p>
         <pre><code>
-explain select * from ab, bc, cd where ab.b = bc.b and bc.c = cd.c;
-explain select * from ab, bc, cd where ab.b = bc.b and bc.c = cd.c order by bc.b;
-create index i3 on cd(c);
-explain select * from ab, bc, cd where ab.b = bc.b and bc.c = cd.c order by bc.b;
-create index i22 on bc (b, c);
-explain select * from ab, bc, cd where ab.b = bc.b and bc.c = cd.c order by bc.b;
-insert into ab select x.id, x.id + 1 from generate_series(1, 100000) as x(id);
-insert into bc select x.id, x.id + 1 from generate_series(1, 100000) as x(id);
-insert into cd select x.id, x.id + 1 from generate_series(1, 100000) as x(id);
-explain select * from ab, bc, cd where ab.b = bc.b and bc.c = cd.c;
-explain select * from ab, bc, cd where ab.b = bc.b and bc.c = cd.c order by cd.c;
-explain select cd.c, count(*) from ab, bc, cd where ab.b = bc.b and bc.c = cd.c group by cd.c order by cd.c;
+    explain select * from ab, bc, cd where ab.b = bc.b and bc.c = cd.c;
+    explain select * from ab, bc, cd where ab.b = bc.b and bc.c = cd.c order by bc.b;
+    create index i3 on cd(c);
+    explain select * from ab, bc, cd where ab.b = bc.b and bc.c = cd.c order by bc.b;
+    create index i22 on bc (b, c);
+    explain select * from ab, bc, cd where ab.b = bc.b and bc.c = cd.c order by bc.b;
+    insert into ab select x.id, x.id + 1 from generate_series(1, 100000) as x(id);
+    insert into bc select x.id, x.id + 1 from generate_series(1, 100000) as x(id);
+    insert into cd select x.id, x.id + 1 from generate_series(1, 100000) as x(id);
+    explain select * from ab, bc, cd where ab.b = bc.b and bc.c = cd.c;
+    explain select * from ab, bc, cd where ab.b = bc.b and bc.c = cd.c order by cd.c;
+    explain select cd.c, count(*) from ab, bc, cd where ab.b = bc.b and bc.c = cd.c group by cd.c order by cd.c;
     </code></pre>
     </li>
-</ol>
-
-
-<hr>
-<h3>Cvičenie 11 (11.12.2019)</h3> 
-
-<b>Postgres a JAVA -  pokračovanie + SQLLite</b><br>
-<a href="db/SQLLite.pdf">krátke slajdy</a><br>
-<a href="https://www.sqlite.org/about.html" target="_blank">SQLLite</a> je databázový systém, ktorý nevyžaduje samostatný server, beží v rámci výpočtového procesu Vašej aplikácie. 
-Ak chcete vo Vašej aplikácii využiť relačnú databázu a nepotrebujete centralizované úložisko (ktoré by zbieralo dáta z viacerých aplikácií), SQLLite je vhodné riešenie.
-
-<ul>
-<li>Prezrite si tutoriál, ako používať SQLLite v JAVE: <a href="http://www.tutorialspoint.com/sqlite/sqlite_java.htm">http://www.tutorialspoint.com/sqlite/sqlite_java.htm</a></li>
-<ul>
-	<li>Stihanite si <a href="https://bitbucket.org/xerial/sqlite-jdbc/downloads" target="_blank">JDBC driver</a></li>
-	<li>Ďalej postupujeme veľmi podobne, ako v prípade PostgreSQL</li>
-</ul>
-</ul>
-
-
-Na cvičení budeme používať databázu známok, ktorú sme vytvárali na predchádzajúcich cvičeniach.
-<ol>
-	<li>Napíšte program, ktorý sa pripojí na databázu a vypíšte na konzolu mená študentov.</li>
-	<li>
-		Naplňte tabuľky náhodnými dátami. Vytvorte si sadu niekoľkých mien a niekoľkých priezvisk (napr. 20-30 mien a 20-30 priezvisk). Nezdržujte sa dlho vymýšľaním mien (radšej použite "AAA", "BBB",...)
-		<ul>
-		<li>
-			Naplňte tabuľky tak, aby ste mali cca 100 učiteľov, 600 študentov, 20 predmetov, a aby mal každý študent okolo 200 známok (cca 10-15 z každého predmetu, t.j. spolu okolo 120 000 známok). 
-		</li>
-		<li>
-			Zmerajte koľko trvá naplnenie tabuľky známok dátami (vypíšte na konzolu, koľko milisekúnd operácia trvala). 
-		</li>
-		</ul>
-	<li>
-		Pri napĺňaní tabuliek vyskúšajte rôzne spôsoby optimalizácie a porovnajte ich rýchlosti (viď <a href="http://www.postgresql.org/docs/9.1/static/populate.html" target="_blank">http://www.postgresql.org/docs/9.1/static/populate.html</a>:
-		<ol>
-		<li>Každý riadok najprv vkladajte jedným insertom bez použitia prepared statementu</li>
-		<li>Každý riadok najprv vkladajte jedným insertom s použitím prepared statementu</li>
-		<li>Spojte niekoľko riadkov do jedného insertu - pravdepodobne nebudeme môcť urobiť INSERT so všetkými riadkami, ktoré chcete vložiť kvôli obmedzaniam na maximálnu veľkosť dotazu (cca niekoľko MB). Vhodné je preto spojiť do jedného INSERT dotazu od 100 do 1000 riadkov. Môžete vyskúšať, koľko Vám systém dovolí</li>
-		<li>Vykonajte všetky INSERT dotazy v jednej transakcii</li>
-		<li>Pred vkladaním zrušte všetky indexy tabuľky a po vložení ich vytvorte</li>
-		<li>Pred vkladaním zrušte všetky CONSTRAINTy tabuľky a po vložení ich vytvorte</li>
-		</ol>
-	</li>
-	<li>
-		Napíšte program, ktorý z konzoly načíta Meno a Priezvisko a triedu študenta a vypíšte jeho známky (nazov predmetu: známky z predmetu oddelené čiarkov). 
-		Ak je študentov s daným menom a triedou viac, vypíšte prvého z nich. Použite prepared statement. 
-		Zabezpečte, aby pri písaní mena nezáležalo na veľkých a malých písmenách. 
-	</li>
-	<li>
-		Upravte program z predchádzajúcej úlohy tak, aby systém vyhľadal študenta, ak používateľ napíšte len časť jeho mena / priezviska. Ak sa nájde viac študentov spĺňajúcich vyhľadávacie kritéria, dajte používateľovi možnosť vybrať si (napr. vypísaním zoznamu a používateľ bude musieť zadať por. číslo / ID, ktorého študenta myslel). 
-	</li>
-</ol>
-
-<hr>
-<h3>Cvičenie  10 (27.11.2019)</h3> 
-<b style="color: red">Pozor! Stredajšie cvičenie 27.11.2019 nebude (neodkladné pracovné povinnosti). Streneme sa 4.12.2019.</b><br><br>
-<b>Pripojenie na Postgres z JAVY</b>
-<br>
-<p><a href="db/java.pdf?v=20161113">Prezentácia [pdf]</a></p>
-Z JAVY sa budeme na databázu Postgres pripájať cez TCP/IP. Aby to však fungovalo, každý si musí nastaviť svoje Postgres heslo a vytvoriť SSH tunel na cvika.dcs.fmph.uniba.sk
-<ol>
-	<li>Pripojte sa cez SSH na cvika.dcs.fmph.uniba.sk</li>
-	<li>Spustite postgres konzolu príkazom <code>psql</code></li>
-	<li>Nastavte si heslo pomocou: <code>ALTER USER {vase_prihlasovacie_meno} WITH PASSWORD '{vase_nove_heslo}'</code></li>
-		<ul>
-		<li>Funkčnosť hesla možno otestovať príkazom <code>psql -h 127.0.0.1 test {vase_prihlasovacie_meno}</code></li>	
-		</ul>
-	<li>Aby sme sa mohli pripájať na postgres bežiaci na cvika.dcs.fmph.uniba.sk  z vývojového prostriedia Eclipse (príp. iného), je potrebné nastaviť SSH tunel:</li>
-	<ul>
-	<li>LINUX: <code>ssh -L5432:127.0.0.1:5432 meno_pouzivatela@cvika.dcs.fmph.uniba.sk</code></li>
-	<li>WINDOWS: v Putty treba nastaviť "local port forwarding" z portu 5432 na 127.0.0.1:5432</li>
-	</ul>
-<li>Vytvorte si nový JAVA projekt</li>
-<li>Stiahnite si Postgres JDBC driver: <a href="https://jdbc.postgresql.org/download.html" target="_blank">https://jdbc.postgresql.org/download.html</a> a nakopírujte ho do adresára projektu</li>
-<li>Pridajte si stiahnutý JAR súbor do "build path". V eclipse je to v menu "Project" -> "properties...":
-<br><img src="db/eclipse.png" alt=""></li>
-<li>Tutoriál, ako sa pripojiť na postgres z JAVY: <a href="http://www.tutorialspoint.com/postgresql/postgresql_java.htm" target="_blank">http://www.tutorialspoint.com/postgresql/postgresql_java.htm</a></li>
-<li>Prípadne postupujte podľa <a href="db/java.pdf">prezentácie</a></li>
-<li>Na cvičení budeme používať databázu známok, ktorú sme vytvárali na predchádzajúcich cvičeniach. </li>
-</ol>
-<b>Úlohy:</b>
-<ol>
-<li>Napíšte program, ktorý sa pripojí na databázu a vypíšte na konzolu mená študentov.</li>
-<li>
-	Naplňte tabuľky náhodnými dátami. Vytvorte si sadu niekoľkých mien a niekoľkých priezvisk (napr. 20-30 mien a 20-30 priezvisk). Nezdržujte sa dlho vymýšľaním mien (radšej použite "AAA", "BBB",...)
-	<ul>
-	<li>
-		Naplňte tabuľky tak, aby ste mali cca 100 učiteľov, 600 študentov, 20 predmetov, a aby mal každý študent okolo 200 známok (cca 10-15 z každého predmetu, t.j. spolu okolo 120 000 známok). 
-	</li>
-	<li>
-		Zmerajte koľko trvá naplnenie tabuľky známok dátami (vypíšte na konzolu, koľko milisekúnd operácia trvala). 
-	</li>
-	</ul>
-<li>
-	Pri napĺňaní tabuliek vyskúšajte rôzne spôsoby optimalizácie a porovnajte ich rýchlosti (viď <a href="http://www.postgresql.org/docs/9.1/static/populate.html" target="_blank">http://www.postgresql.org/docs/9.1/static/populate.html</a>:
-	<ol>
-	<li>Každý riadok najprv vkladajte jedným insertom bez použitia prepared statementu</li>
-	<li>Každý riadok najprv vkladajte jedným insertom s použitím prepared statementu</li>
-	<li>Spojte niekoľko riadkov do jedného insertu - pravdepodobne nebudeme môcť urobiť INSERT so všetkými riadkami, ktoré chcete vložiť kvôli obmedzaniam na maximálnu veľkosť dotazu (cca niekoľko MB). Vhodné je preto spojiť do jedného INSERT dotazu od 100 do 1000 riadkov. Môžete vyskúšať, koľko Vám systém dovolí</li>
-	<li>Vykonajte všetky INSERT dotazy v jednej transakcii</li>
-	<li>Pred vkladaním zrušte všetky indexy tabuľky a po vložení ich vytvorte</li>
-	<li>Pred vkladaním zrušte všetky CONSTRAINTy tabuľky a po vložení ich vytvorte</li>
-	</ol>
-</li>
-<li>
-	Napíšte program, ktorý z konzoly načíta Meno a Priezvisko a triedu študenta a vypíšte jeho známky (nazov predmetu: známky z predmetu oddelené čiarkov). 
-	Ak je študentov s daným menom a triedou viac, vypíšte prvého z nich. Použite prepared statement. 
-	Zabezpečte, aby pri písaní mena nezáležalo na veľkých a malých písmenách. 
-</li>
-<li>
-	Upravte program z predchádzajúcej úlohy tak, aby systém vyhľadal študenta, ak používateľ napíšte len časť jeho mena / priezviska. Ak sa nájde viac študentov spĺňajúcich vyhľadávacie kritéria, dajte používateľovi možnosť vybrať si (napr. vypísaním zoznamu a používateľ bude musieť zadať por. číslo / ID, ktorého študenta myslel). 
-</li>
-</li>
-</ol>
-<hr>
-<h3>Cvičenie  9 (20.11.2019)</h3> 
-<ul>
-<li><b><a href="db/window_functions.pdf">Window functions (slajdy)</a></b>
-
-<br><br>
-Pracujeme s databázou <a href="db/db3/emp.sql">emp</a>. Vytvorte si súbor window_emp.sql a do neho napíšte nasledovné SQL dotazy s pomocou window functions:
-</li>
-
-<ol>
-<li>
-	Pre každého zamestnanca nájdite jeho poradové číslo podľa jeho platu (stĺpec salary). Zamestnanci s rovnakým platom majú mať rovnaké poradové číslo.
-</li>
-<li>
-	Pre každého zamestnanca nájdite jeho poradové číslo podľa jeho platu s prémiam (stĺpec salary + commision).
-</li>
-<li>
-	Pre každého zamestnanca vypíšte rozdiel jeho platu od priemerného platu v jeho departmente. 
-</li>
-<li>
-	Pre každého zamestnanca vypíšte jeho poradové číslo v rámci zamestnancov z toho istého mesta, rozdiel od priemerného platu v danom meste a počet zamestnancov v tomto meste.
-</li>
-<li>
-	Firma potrebuje ušetriť na platoch mesačne 8000 eur. Zobrazte zoznam zamestnancou s najnižším platom, ktorých súčet platov je menší ako 8000 eur.  T.j. počínajúc zamestnancom s najmenším až po zamestnanca, ktorého plat spolu s predošlými zamestnancami je najbližšie pod hranicou 8000 eur. 
-</li>
-<li>
-	Podobne ako v predošlom cvičení, ale chceme skončiť tesne nad 8000 eur (t.j. zoznam skončí akonáhle suma platov presiahne 8000 eur. 	<br><br>
-</li>
-</ol>
-<li><b>Dokončenie minulého cvičenia GRANT/REVOKE:</b></li>
-
-<ol>
-<li>Pripojte sa na databázu "test" (<b>psql test</b>), vytvorte novú tabuľku "test_vasemeno" so stĺpcami i INTEGER a t TEXT a doplňte do nej niekoľko riadkov. Prideľte právo na SELECT z tejto tabuľky role "test" (ďalej testovacia rola) a overte pomocou \z, či je naozaj pridelené. Spustite <b>psql -U test test</b>, skúste si prezrieť obsah tabuľky test_vasemeno a skúste do nej vložiť nový riadok.</br></li>
-<li>Upravte testovacej role práva na SELECT tak, aby mala možnosť prezerať si v tabuľke test_vasemeno len obsah stĺpca t.</br></li>
-<li>Povoľte spolužiakovi vkladať do tabuľky test_vasemeno riadky tak, aby mohol toto oprávnenie prideliť iným. Vyskúšajte: nech pridelí toto oprávnenie role test. Potom mu odoberte možnosť prideliť toto oprávnenie iným (REVOKE GRANT OPTION FOR) tak, aby stále sám mohol vkladať riadky. Požiadajte ho, nech vyskúša, či to funguje.</br></li>
-<li>Vyskúšajte možnosť kaskádovitého odobratia oprávnenia (pozri CASCADE na stránke <a href="http://www.postgresql.org/docs/9.1/static/sql-revoke.html">http://www.postgresql.org/docs/9.1/static/sql-revoke.html</a>).</br></li>
-<li>Odoberte spolužiakom a testovacej role všetky oprávnenia, ktoré ste im udelili (REVOKE ALL PRIVILEGES FROM).</br></li>
-</ol>
 </ul>
 
 
 <hr>
-<h3>Cvičenie  8 (13.11.2019)</h3> 
-<b>Constraints:</b>
-<p><a href="http://www.dcs.fmph.uniba.sk/~mazak/vyucba/db_praktikum/constraints.pdf">Prezentácia [pdf]</a></p>
+<h3>Cvičenie 11 </h3> 
 
-<p>Pokračujeme v práci s tabuľkami vytvorenými minule (cvičenie 7).</p>
+<h4>Vkladanie veľkých objemov dát</h4>
+<!-- TODO
+vytvorenie databazy z CSV suboru cez nejaky bulk insert
+https://simplemaps.com/data/world-cities
+-->
 
-<ol>
-    <li>Pre každú tabuľku zvoľte primárny kľúč.</br></li>
-    <li>Pomocou UNIQUE zabezpečte, aby trieda mohla mať predmet pridelený len raz (vyhýbame sa duplicitným záznamom).</br></li>
-    <li>Zakážte NULL v stĺpcoch, kde je nutné evidovať hodnotu (napr. nie je nutné, aby študent mal evidované pohlavie, ale musí mať meno).</br></li>
-    <li>Obmedzte pomocou CHECK možné hodnoty pre pohlavie a dátum narodenia (zvoľte si nejaký zmysluplný rozsah). Vyskúšajte, či vaše obmedzenie funguje pri INSERT aj pri UPDATE.</br></li>
-    <li>Doplňte cudzie kľúče do tabuľky známok: hodnoty v stĺpcoch musia odkazovať na existujúceho študenta, učiteľa a predmet. Overte funkčnosť pri INSERT, kde odkaz na predmet je neexistujúci alebo NULL.</br></li>
-    <li>Ku všetkým cudzím kľúčom doplňte zmysluplné hodnoty pre ON DELETE: pri zmazaní študenta treba zmazať záznamy o jeho známkach; učiteľa alebo predmet nie je možné zmazať, ak sa ich týkajú nejaké záznamy o známkach. Overte, či vaše nastavenia fungujú pri pokuse o zmazanie všetkých učiteľov, všetkých predmetov či jednotlivých študentov.</br></li>
-    <li>Ku všetkým cudzím kľúčom doplňte zmysluplné hodnoty pre ON UPDATE a nastavte okamžité vyhodnocovanie s možnosťou zmeniť ho v rámci transakcie (DEFERRABLE INITIALLY IMMEDIATE).</br></li>
-    <li>Napíšte dotaz, ktorý presunie všetky známky z biológie pre študentov z 1.A z jedného učiteľa na iného. Preverte, že dotaz funguje správne.</br></li>
-    <li>Vymažte z databázy všetkých učiteľov, ktorí udelili viac ako 5 známok. (Možno budete potrebovať viac ako 1 dotaz.)</br></li>
-    <li>Pripojte sa na databázu "test" (<b>psql test</b>), vytvorte novú tabuľku "test_vasemeno" so stĺpcami i INTEGER a t TEXT a doplňte do nej niekoľko riadkov. Prideľte právo na SELECT z tejto tabuľky role "test" (ďalej testovacia rola) a overte pomocou \z, či je naozaj pridelené. Spustite <b>psql -U test test</b>, skúste si prezrieť obsah tabuľky test_vasemeno a skúste do nej vložiť nový riadok.</br></li>
-    <li>Upravte testovacej role práva na SELECT tak, aby mala možnosť prezerať si v tabuľke test_vasemeno len obsah stĺpca t.</br></li>
-    <li>Povoľte spolužiakovi vkladať do tabuľky test_vasemeno riadky tak, aby mohol toto oprávnenie prideliť iným. Vyskúšajte: nech pridelí toto oprávnenie role test. Potom mu odoberte možnosť prideliť toto oprávnenie iným (REVOKE GRANT OPTION FOR) tak, aby stále sám mohol vkladať riadky. Požiadajte ho, nech vyskúša, či to funguje.</br></li>
-    <li>Vyskúšajte možnosť kaskádovitého odobratia oprávnenia (pozri CASCADE na stránke <a href="http://www.postgresql.org/docs/9.1/static/sql-revoke.html">http://www.postgresql.org/docs/9.1/static/sql-revoke.html</a>).</br></li>
-    <li>Odoberte spolužiakom a testovacej role všetky oprávnenia, ktoré ste im udelili (REVOKE ALL PRIVILEGES FROM).</br></li>
-</ol>
+<h4>Transakcie a izolácia</h4>
+<!-- TODO
+vyskusat BEGIN, COMMIT, ABORT, a co sa stane, ak zacneme transakciu v psql, ale nechame ju neukoncenu --- ostatne tx by nemali vidiet vykonane zmeny
+z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, skusit nejake prelinanie
+-->
 
 <hr>
-<h3>Cvičenie  7 (6.11.2019)</h3> 
-<b>SQL, DDL, DML:</b>
+<h3>Cvičenie 10</h3> 
+
+<h4>SQLite</h4>
 <ul>
-<li><a href="db/ddl.pdf">slajdy z cvičení</a></li>
-<li>Postgres dokumentácia:
-	<ul>
-		<li><a href="http://www.postgresql.org/docs/current/static/sql-createtable.html">CREATE TABLE</a></li>
-		<li><a href="http://www.postgresql.org/docs/current/static/sql-droptable.html">DROP TABLE</a></li>
-		<li><a href="http://www.postgresql.org/docs/current/static/sql-altertable.html">ALTER TABLE</a></li>
-		<li><a href="http://www.postgresql.org/docs/current/static/sql-insert.html">INSERT</a></li>
-		<li><a href="http://www.postgresql.org/docs/current/static/sql-update.html">UPDATE</a></li>
-		<li><a href="http://www.postgresql.org/docs/current/static/sql-delete.html">DELETE</a></li>
-		<li><a href="http://www.postgresql.org/docs/current/static/sql-createdatabase.html">CREATE DATABASE</a></li>
-		<li><a href="http://www.postgresql.org/docs/current/static/sql-dropdatabase.html">DROP DATABASE</a></li>
-	</ul>
-	</li>
-<li><b>Zadanie:</b>
-	<ol>
-	<li>Chceme založiť databázu pre evidenciu známok, študentov a učiteľov na strednej škole. Potrebujeme evidovať nasledovné:
-		<ul>
-		<li>Študent - meno, priezvisko, pohlavie, trieda, dátum narodenia</li>
-		<li>Učiteľ - meno, priezvisko, pohlavie</li>
-		<li>Predmet - názov predmetu, skratka</li>
-		<li>Známka - samotná známka (text), študent, ktorý učiteľ ju zadal, z akého je predmetu, čas zadania, z čoho bola, váha známky (do priemeru)</li>
-		<li>Nie všetky triedy majú všetky predmety, preto potrebujeme evidovať ktorá trieda ma ktorý predmet</li>
-		</ul>
-	</li>
-	<li>
-		Navrhnite štruktúru tabuliek vyššie uvedenej databýzy - vytvorte súbor <b>znamky.sql</b>, ktorý bude obsahovať SQL definície tabuliek (CREATE TABLE). 
-		<ul><li>Pred každý CREATE TABLE pridajte aj DROP TABLE IF EXISTS, aby ste súbor znamky.sql mohli spúšťat viac krát. </li></ul>
-	</li>
-	<li>
-		Súbor znamky.sql doplňte o údaje - do každej tabuľky pridajte pomocou INSERT niekoľko riadkov.
-		<ul><li>Skúste použiť diakritiku - pozor na kódovanie súboru znamky.sql</li></ul>
-	</li>
-	<li>
-		Rozhodli sme sa sprístupniť zadávanie a prezeranie známok cez internet. Pomocou ALTER TABLE doplňte do tabuliek študent a učiteľ stĺpce na evidenciu prihlasovacích mien a hesiel. Vytvorte index na vyhľadávanie podľa prihlasovacieho mena. 
-	</li>
-	<li>
-		Niektorí z učiteľov sa rozhodol odísť zo školy a chceme ho vymazať z databázy. Známky však musia ostať, t.j. jeho známky sa presunú na iného učiteľa. 
-		<ul>
-			<li>Napíšte dotaz, ktorý vymaže učiteľa z databázy (na základe jeho ID)</li>
-			<li>Napíšte dotaz, ktorý presunie známky z jedného učiteľa na druhého (poznáme ID oboch učiteľov)</li>
-		</ul>
-	</li>
-	<li>Chceme zdvojnásobiť váhu všetkých známok, ktorých hodnota začína 5 - napíšte dotaz</li>
-	<li>Na koniec súboru znamky.sql napíšte nasledovné SELECT dotazy</li>
-		<ol>
-		<li>
-			Vypíšte meno študenta, predmet, počet študentových známok z daného predmetu a zoznam týchto známok oddelený čiarkov (skúste použiť funkciu <a href="http://www.postgresql.org/docs/9.4/static/functions-aggregate.html">array_agg</a>, prípadne aj <a href="http://www.postgresql.org/docs/9.1/static/functions-array.html">array_to_string</a>
-		</li>
-		<li>
-			Meno študenta a meno predmetu, kde predmet je taký, z ktorého študent ešte nemá žiadnu známku ale mal by mať (tento predmet je v zozname predmetov jeho triedy). 
-			Doplňte zoznam o priemerný počet známok z daného predmetu študentových spolužiakov z triedy. 
-		</li>
-		<li>
-			Pre každý predmet spočítajte celkový počet a priemerný počet známok na žiaka, koľko učiteľov zadáva známky z tohto predmetu. Výsledok usporiadajte podľa celkového počtu známok a zobrazte len prvých 10 riadkov. 
-		</li>
-		<li>
-			Pre každého učiteľa vypočítajte priemer prirodzeno-číselných známok, ktore zadal. Pozor, funkcia AVG potrebuje na vstupe číslo - potrebujete použiť CAST( .. AS INTEGER). Ak to číslo však nebude číslo, vyhlási to chybu. Nečíselné známky odfiltrujte napr. pomocou regulárnych výrazov (napr. konštrukcia WHERE znamka ~ '^[0-9]*$').
-		</li>
-		</ol>
-	
-	</ol>
-</li>
+    <li><a href="https://www.sqlite.org/about.html" target="_blank">SQLite</a> je databázový systém, ktorý nevyžaduje samostatný server --- beží v rámci výpočtového procesu Vašej aplikácie. Ak chcete vo Vašej aplikácii využiť relačnú databázu a nepotrebujete centralizované úložisko (ktoré by zbieralo dáta z viacerých aplikácií), SQLite je zvyčajne vhodné riešenie. Taktiež sa vo veľkom využíva na testovanie, pri tvorbe prototypov a v úvodnej fáze vývoja aj v prípadoch, keď v produkčnej verzii softvéru bude použitý iný databázový systém.</li>
+    <li><a href="10/sqlite.pdf">prezentácia</a></li>    
+</ul>
+
+<h4>Pripojenie k databáze z prostredia programovacieho jazyka Java</h4>
+<ul>
+    <li><a href="10/java.pdf">prezentácia</a></li>
+    <li>Vytvorte si nový projekt. Stiahnite si <a href="https://bitbucket.org/xerial/sqlite-jdbc/downloads" target="_blank">SQLite JDBC driver</a> a pridajte ho do projektu.</li>
+    <li>Pozrite si <a href="http://www.tutorialspoint.com/sqlite/sqlite_java.htm" target="_blank">tutoriál</a> k používaniu SQLite v Jave.</li>
+    <li>Na cvičení budeme používať databázu známok, ktorú sme vytvárali na predchádzajúcich cvičeniach.</li>
+    <li>Úlohy:
+        <ol>
+            <li>Napíšte program, ktorý sa pripojí na databázu a vypíšte na konzolu mená študentov.</li>
+            <li>
+                Naplňte tabuľky náhodnými dátami. Vytvorte si sadu niekoľkých mien a niekoľkých priezvisk (napr. 20-30 mien a 20-30 priezvisk). Nezdržujte sa dlho vymýšľaním mien (radšej použite "AAA", "BBB",...)
+                <ul>
+                <li>
+                    Naplňte tabuľky tak, aby ste mali cca 100 učiteľov, 600 študentov, 20 predmetov, a aby mal každý študent okolo 200 známok (cca 10-15 z každého predmetu, t.j. spolu okolo 120 000 známok). 
+                </li>
+                <li>
+                    Zmerajte koľko trvá naplnenie tabuľky známok dátami (vypíšte na konzolu, koľko milisekúnd operácia trvala). 
+                </li>
+                </ul>
+            <li>
+                Pri napĺňaní tabuliek vyskúšajte rôzne spôsoby optimalizácie a porovnajte ich rýchlosti (viď <a href="http://www.postgresql.org/docs/9.1/static/populate.html" target="_blank">http://www.postgresql.org/docs/9.1/static/populate.html</a>):
+                <ol>
+                <li>Každý riadok najprv vkladajte jedným insertom bez použitia prepared statementu</li>
+                <li>Každý riadok najprv vkladajte jedným insertom s použitím prepared statementu</li>
+                <li>Spojte niekoľko riadkov do jedného insertu - pravdepodobne nebudeme môcť urobiť INSERT so všetkými riadkami, ktoré chcete vložiť, kvôli obmedzeniam na maximálnu veľkosť dotazu (cca niekoľko MB). Vhodné je preto spojiť do jedného INSERT dotazu od 100 do 1000 riadkov. Môžete vyskúšať, koľko Vám systém dovolí</li>
+                <li>Vykonajte všetky INSERT dotazy v jednej transakcii</li>
+                <li>Pred vkladaním zrušte všetky indexy tabuľky a po vložení ich vytvorte</li>
+                <li>Pred vkladaním zrušte všetky CONSTRAINTy tabuľky a po vložení ich vytvorte</li>
+                </ol>
+            </li>
+
+            <li>
+                Napíšte program, ktorý z konzoly načíta Meno a Priezvisko a triedu študenta a vypíšte jeho známky (nazov predmetu: známky z predmetu oddelené čiarkov). 
+                Ak je študentov s daným menom a triedou viac, vypíšte prvého z nich. Použite prepared statement. 
+                Zabezpečte, aby pri písaní mena nezáležalo na veľkých a malých písmenách. 
+            </li>
+            <li>
+                Upravte program z predchádzajúcej úlohy tak, aby systém vyhľadal študenta, ak používateľ napíšte len časť jeho mena / priezviska. Ak sa nájde viac študentov spĺňajúcich vyhľadávacie kritéria, dajte používateľovi možnosť vybrať si (napr. vypísaním zoznamu a používateľ bude musieť zadať por. číslo / ID, ktorého študenta myslel). 
+            </li>
+        </ol>
+    </li>
+    <li>Vyskúšajte pripojiť sa na databázu PostgreSQL (cez TCP/IP) miesto SQLite. Ak ju nemáte spustenú lokálne, môžete využiť server cvika.dcs.fmph.uniba.sk, prístup však treba nastaviť (ukážeme si využitie SSH tunela, čiže port forwarding):    
+        <ol>
+            <li>Pripojte sa cez SSH na cvika.dcs.fmph.uniba.sk a spusťte <b>psql</b>.</li>
+            <li>Nastavte si heslo pomocou <pre>ALTER USER {vase_prihlasovacie_meno} WITH PASSWORD '{vase_nove_heslo}'</pre>
+                Funkčnosť hesla možno otestovať príkazom <pre>psql -h 127.0.0.1 test {vase_prihlasovacie_meno}</pre>	
+            </li>
+            <li>Aby sme sa mohli pripájať na Postgres bežiaci na cvika.dcs.fmph.uniba.sk zo vzdialeného počítača, vytvoríme SSH tunel:
+                <ul>
+                    <li>LINUX: <code>ssh -L5432:127.0.0.1:5432 meno_pouzivatela@cvika.dcs.fmph.uniba.sk</code></li>
+                    <li>WINDOWS: v Putty treba nastaviť "local port forwarding" z portu 5432 na 127.0.0.1:5432</li>
+                </ul>
+            </li>
+            <li>Stiahnite si <a href="https://jdbc.postgresql.org/download.html" target="_blank">PostgreSQL JDBC driver</a> a pridajte ho do projektu.</li>
+            <li>Podľa <a href="http://www.tutorialspoint.com/postgresql/postgresql_java.htm" target="_blank">tutoriálu</a> sa pripojte k databáze.</li>
+        </ol>
+    </li>
+    <li>Otestujte rýchlosť vykonávania dotazov a porovnajte ju s výsledkami pre SQLite.</li>
+</ul>
+
+
+
+<hr>
+<h3>Cvičenie 9</h3>
+
+<h4>Constraints</h4>
+<ul>
+    <li><a href="09/constraints.pdf">prezentácia</a></li>
+    <li>Pokračujeme v práci s tabuľkami vytvorenými v predošlom cvičení.</li>
+    <li>Úlohy:
+        <ol>
+            <li>Pre každú tabuľku zvoľte primárny kľúč.</li>
+            <li>Pomocou UNIQUE zabezpečte, aby trieda mohla mať predmet pridelený len raz (vyhýbame sa duplicitným záznamom).</li>
+            <li>Zakážte NULL v stĺpcoch, kde je nutné evidovať hodnotu (napr. nie je nutné, aby študent mal evidované pohlavie, ale musí mať meno).</li>
+            <li>Obmedzte pomocou CHECK možné hodnoty pre pohlavie a dátum narodenia (zvoľte si nejaký zmysluplný rozsah). Vyskúšajte, či vaše obmedzenie funguje pri INSERT aj pri UPDATE.</li>
+            <li>Doplňte cudzie kľúče do tabuľky známok: hodnoty v stĺpcoch musia odkazovať na existujúceho študenta, učiteľa a predmet. Overte funkčnosť pri INSERT, kde odkaz na predmet je neexistujúci alebo NULL.</li>
+            <li>Ku všetkým cudzím kľúčom doplňte zmysluplné hodnoty pre ON DELETE: pri zmazaní študenta treba zmazať záznamy o jeho známkach; učiteľa alebo predmet nie je možné zmazať, ak sa ich týkajú nejaké záznamy o známkach. Overte, či vaše nastavenia fungujú pri pokuse o zmazanie všetkých učiteľov, všetkých predmetov či jednotlivých študentov.</li>
+            <li>Ku všetkým cudzím kľúčom doplňte zmysluplné hodnoty pre ON UPDATE a nastavte okamžité vyhodnocovanie s možnosťou zmeniť ho v rámci transakcie (DEFERRABLE INITIALLY IMMEDIATE).</li>
+            <li>Napíšte dotaz, ktorý presunie všetky známky z biológie pre študentov z 1.A z jedného učiteľa na iného. Preverte, že dotaz funguje správne.</li>
+        </ol>
+    </li>
+</ul>
+
+<h4>Views</h4>
+<ul>
+    <li>Pozrite si <a href="https://www.postgresql.org/docs/current/sql-createview.html">dokumentáciu k VIEW</a>.</li>
+    <li>Pokračujeme v práci s tabuľkami vytvorenými v predošlom cvičení.</li>
+    <li>Vytvorte pohľad (VIEW), ktorý pre každého študenta a predmet, ktorý je priradený jeho triede, zobrazuje priemer známok. Záznamy by mali byť zoradené podľa mena študenta, potom podľa názvu predmetu, a nakoniec podľa priemeru známok (všetko vzostupne, čiže ASC).</li>
+    <li>Overte, že vytvorený pohľad sa zachová aj po odhlásení a opätovnom prihlásení.</li>
+    <li>Overte, že vytvorený pohľad reflektuje zmeny v podkladových dátach.</li>
 </ul>
 
 <hr>
-<h3>Cvičenie 6 (30.10.2019)</h3> 
-<b>Agregácia v SQL II</b>
+<h3>Cvičenie 8</h3> 
+
+<h4>DDL, DML</h4>
 <ul>
-	<li>Adresár db6 obsahuje naviac aj súbory:
-		<ul>
-			<li><a href="db/db6/world.sql">world.sql</a> - súbor obsahuje definíciu a dáta sample databázy</a></li>					
-			<li><a href="db/db6/zadanie.sql">zadanie.sql</a> - Súbor obsahujúci zoznam dotazov, ktoré máte vypracovať. Tento súbor budete editovať</a></li>					
-		</ul>
-		
-		<li>Naimportujte si databázu world: 
-			<pre>psql -f world.sql</pre>
-		</li>
-		
-		<li>V jednom okne editujete súbor zadanie.sql</li>
-		<li>V druhom okne spúšťate dotazy cez psql -f zadanie.sql</li>
+    <li><a href="08/ddl.pdf">slajdy z cvičení</a></li>
+    <li>Postgres dokumentácia:
+        <ul>
+            <li><a href="http://www.postgresql.org/docs/current/static/sql-createtable.html">CREATE TABLE</a></li>
+            <li><a href="http://www.postgresql.org/docs/current/static/sql-droptable.html">DROP TABLE</a></li>
+            <li><a href="http://www.postgresql.org/docs/current/static/sql-altertable.html">ALTER TABLE</a></li>
+            <li><a href="http://www.postgresql.org/docs/current/static/sql-insert.html">INSERT</a></li>
+            <li><a href="http://www.postgresql.org/docs/current/static/sql-update.html">UPDATE</a></li>
+            <li><a href="http://www.postgresql.org/docs/current/static/sql-delete.html">DELETE</a></li>
+            <li><a href="http://www.postgresql.org/docs/current/static/sql-createdatabase.html">CREATE DATABASE</a></li>
+            <li><a href="http://www.postgresql.org/docs/current/static/sql-dropdatabase.html">DROP DATABASE</a></li>
+        </ul>
 	</li>
-	
+    <li>Chceme založiť databázu pre evidenciu známok, študentov a učiteľov na strednej škole. Potrebujeme evidovať nasledovné:
+        <ul>
+            <li>Študent --- meno, priezvisko, pohlavie, trieda, dátum narodenia</li>
+            <li>Učiteľ --- meno, priezvisko, pohlavie</li>
+            <li>Predmet --- názov predmetu, skratka</li>
+            <li>Známka --- samotná známka (text), študent, ktorý učiteľ ju zadal, z akého je predmetu, čas zadania, z čoho bola, váha známky (do priemeru)</li>
+            <li>Nie všetky triedy majú všetky predmety, preto potrebujeme evidovať, ktorá trieda má ktorý predmet.</li>
+        </ul>
+        Navrhnite štruktúru tabuliek vyššie uvedenej databázy --- vytvorte súbor <b>znamky.sql</b>, ktorý bude obsahovať SQL definície tabuliek (CREATE TABLE). 
+        Na začiatok súboru pridajte príkaz <b>DROP TABLE IF EXISTS</b>, aby ste súbor znamky.sql mohli spúšťať viackrát.
+    </li>
+    <li>Súbor znamky.sql doplňte o údaje --- do každej tabuľky pridajte pomocou INSERT niekoľko riadkov (opäť --- príkazy chceme mať spísané v súbore, aby sme ich mohli vykonať opakovane; môže to byť súbor <b>znamky.sql</b>).</li>
+    <li>Skúste použiť aj diakritiku --- pozor na kódovanie súboru <b>znamky.sql</b>.</li>
+    <li>
+        Rozhodli sme sa sprístupniť zadávanie a prezeranie známok cez internet. Pomocou <b>ALTER TABLE</b> doplňte do tabuliek študent a učiteľ stĺpce na evidenciu prihlasovacích mien (heslá pre jednoduchosť nepoužijeme, z <a href="https://auth0.com/blog/adding-salt-to-hashing-a-better-way-to-store-passwords/">bezpečnostných dôvodov</a> sa nesmú v databáze ukladať v odkrytej podobe). Vytvorte index na vyhľadávanie podľa prihlasovacieho mena. 
+    </li>
+    <li>
+        Jeden z učiteľov sa rozhodol odísť zo školy a chceme ho vymazať z databázy. Známky však musia ostať, t.j. jeho známky sa presunú na iného učiteľa.
+        <ul>
+            <li>Napíšte dotaz, ktorý presunie známky z jedného učiteľa na druhého (poznáme ID oboch učiteľov).</li>
+            <li>Napíšte dotaz, ktorý vymaže učiteľa z databázy (na základe jeho ID).</li>
+        </ul>
+        (Evidencia historických dát je jeden z najotravnejších praktických problémov, s ktorými sa pri návrhu databáz stretávame. Pozrite si, hoci len zbežne, <a href="https://docs.microsoft.com/en-us/sql/relational-databases/tables/temporal-tables?view=sql-server-ver15">jedno z možných riešení</a>.)
+    </li>        
+    <li>Ďalšie úlohy:
+        <ol>
+            <li>Zdvojnásobte váhu všetkých známok, ktorých hodnota začína na "5" --- napíšte dotaz.</li>
+            <li>
+                Vypíšte meno študenta, predmet, počet študentových známok z daného predmetu a zoznam týchto známok oddelených čiarkami (skúste použiť funkciu <a href="http://www.postgresql.org/docs/9.4/static/functions-aggregate.html">array_agg</a>, prípadne aj <a href="http://www.postgresql.org/docs/9.1/static/functions-array.html">array_to_string</a>).
+            </li>
+            <li>
+                Vypíšte zoznam študentov a ku každému z nich mená predmetov takých, že z nich študent nemá známku, ale mal by mať (tento predmet je v zozname predmetov jeho triedy). 
+                Doplňte zoznam o priemerný počet známok z daného predmetu pre danú triedu.
+            </li>
+            <li>
+                Pre každý predmet spočítajte celkový počet a priemerný počet známok na žiaka. Výsledok usporiadajte podľa celkového počtu známok a zobrazte len prvých 10 riadkov. 
+            </li>
+            <li>
+                Pre každého učiteľa vypočítajte priemer prirodzeno-číselných známok, ktore zadal. Pozor, funkcia AVG potrebuje na vstupe číslo --- potrebujete použiť CAST(... AS INTEGER). Ak to číslo však nebude číslo, vyhlási to chybu. Nečíselné známky odfiltrujte napr. pomocou regulárnych výrazov (napr. konštrukcia WHERE znamka ~ '^[0-9]*$').
+            </li>
+        </ol>    
+    </li>
+</ul>
+
+<hr>
+<h3>Cvičenie  7</h3> 
+
+<h4>Window functions</h4>
+<ul>
+    <li><a href="07/window_functions.pdf">prezentácia</a></li>
+    <li>Vytvorte si lokálnu databázu (SQLite/PostgreSQL) alebo sa pripojte na cvika.dcs.fmph.uniba.sk (návod viď predchádzajúce cvičenia).</li>
+    <li>Pracujeme s databázou zamestnancov (<a href="04/emp.sql">emp.sql</a>). Napíšte (napr. do nového súboru window_emp.sql) nasledovné SQL dotazy využívajúce window functions:
+        <ol>
+            <li>Pre každého zamestnanca nájdite jeho poradové číslo podľa jeho platu (stĺpec salary). Zamestnanci s rovnakým platom majú mať rovnaké poradové číslo.</li>
+            <li>Pre každého zamestnanca vypíšte rozdiel jeho platu od priemerného platu v jeho departmente.</li>
+            <li>Pre každého zamestnanca vypíšte jeho poradové číslo v rámci zamestnancov z toho istého mesta, rozdiel od priemerného platu v danom meste a počet zamestnancov v tomto meste.</li>
+            <li>Firma potrebuje ušetriť na platoch mesačne 8000 USD. Zobrazte najdlhší možný zoznam zamestnancov s najnižším platom, ktorých súčet platov je menší ako 8000 (t.j. počínajúc zamestnancom s najmenším platom, až po zamestnanca, ktorého plat spolu s predošlými zamestnancami je najbližšie pod hranicou 8000).</li>
+            <li>Podobne ako v predošlom cvičení, ale chceme skončiť tesne nad 8000 eur (t.j. zoznam skončí akonáhle suma platov presiahne 8000).</li>
+        </ol>
+    </li>
+</ul>
+
+<h4>Prístupové práva</h4>
+<ul>
+    <li>dokumentácia: <a href="https://www.postgresql.org/docs/current/sql-grant.html">GRANT</a>, <a href="https://www.postgresql.org/docs/current/sql-revoke.html">REVOKE</a></li>
+    <li>Prihláste sa na cvika.dcs.fmph.uniba.sk (návod viď predchádzajúce cvičenia) a ripojte sa na databázu "test" (<b>psql test</b>).</li>
+    <li>Vytvorte novú tabuľku príkazom <pre>CREATE TABLE test_vasemeno (i INTEGER, t TEXT);</pre> a doplňte do nej niekoľko riadkov: <pre>
+    INSERT INTO test_vasemeno VALUES (1, "a"); 
+    INSERT INTO test_vasemeno VALUES (2, "b");
+    </pre></li>
+    <li>Prideľte právo na SELECT z tejto tabuľky role "test" (ďalej testovacia rola) a overte pomocou <b>\z</b>, či je naozaj pridelené.
+    Spustite <b>psql -U test test</b>, skúste si prezrieť obsah tabuľky test_vasemeno a skúste do nej vložiť nový riadok.</li>
+    <li>Upravte testovacej role práva na SELECT tak, aby mala možnosť prezerať si v tabuľke test_vasemeno len obsah stĺpca t.</li>
+    <li>Povoľte spolužiakovi vkladať do tabuľky test_vasemeno riadky tak, aby mohol toto oprávnenie prideliť iným. Vyskúšajte: nech pridelí toto oprávnenie role test. Potom mu odoberte možnosť prideliť toto oprávnenie iným (REVOKE GRANT OPTION FOR) tak, aby stále sám mohol vkladať riadky. Požiadajte ho, nech vyskúša, či to funguje.</li>
+    <li>Vyskúšajte možnosť kaskádovitého odobratia oprávnenia (pozri CASCADE na stránke <a href="http://www.postgresql.org/docs/9.1/static/sql-revoke.html">http://www.postgresql.org/docs/9.1/static/sql-revoke.html</a>).</li>
+    <li>Odoberte spolužiakom a testovacej role všetky oprávnenia, ktoré ste im udelili (REVOKE ALL PRIVILEGES FROM).</li>
+    <li>Zbežne si pozrite <a href="https://www.postgresql.org/docs/9.1/auth-methods.html">možnosti prihlasovania</a> k databáze, aby ste si vytvorili predstavu o súčasných technológiách. (Nie, nebudeme to vyžadovať na žiadnej skúške.)</li>
+</ul>
+
+<hr>
+<h3>Cvičenie 6</h3> 
+
+<h4>Rekurzia v SQL</h4>
+<ul>
+    <li><a href="06/sql_recursion.pdf">prezentácia</a></li>
+    <li><a href="https://sourceforge.net/p/postgres-xl/postgres-xl/ci/56008fbd7d08d3e8719ca2c91013507fdd011d3f/tree/src/test/regress/expected/with.out">príklady vhodného a nevhodného použitia</a></li>
+    <li>Vytvorte si lokálnu databázu (SQLite/PostgreSQL) alebo sa pripojte na cvika.dcs.fmph.uniba.sk (návod viď predchádzajúce cvičenia).</li>
+    <li>Napíšte rekurzívny dotaz, ktorý vypočíta hodnotu n! (faktoriál) pre n = 10.</li>
+    <li>Napíšte rekurzívny dotaz, ktorý vypočíta hodnotu 30. Fibonacciho čísla.</li>
+    <li>Uvažujme databázu zamestnancov, ktorú sme používali na predošlých cvičeniach. Nájdite ku každému manažérovi zoznam jeho podriadených a ku každému podriadenému uveďte, či je priamy alebo nepriamy.</li>
+    <li>Vytvorte si databázu ciest medzi mestami (<a href="06/world.sql">roads.sql</a>) a napíšte dotaz, ktorý zistí, (a) odkiaľ sa dá dostať do Ríma; (b) odkiaľ sa dá dostať do Ríma po prejdení najviac 1000 km.</li>
+</ul>
+
+<h4>Agregácia v SQL</h4>
+<ul>
+    <li>Vytvorte si lokálnu databázu (SQLite/PostgreSQL) alebo sa pripojte na cvika.dcs.fmph.uniba.sk (návod viď predchádzajúce cvičenia).
+	<li>Stiahnite si nasledujúce súbory:
+		<ul>
+			<li><a href="06/world.sql">world.sql</a> --- definícia databázovej schémy a dáta</li>					
+			<li><a href="06/queries_world.sql">queries_world.sql</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>					
+		</ul>
+	</li>
+    <li>Naimportujte si databázu world: 
+        <pre>psql -f world.sql</pre>
+    </li>
+	<li>Vyriešte všetky zadané úlohy.</li>
 </ul>
 
 <hr>
@@ -399,7 +402,7 @@ Pracujeme s databázou <a href="db/db3/emp.sql">emp</a>. Vytvorte si súbor wind
 <h4>Agregácia v SQL</h4>
 <ul>
     <li><a href="05/sql_agg.pdf">prezentácia</a></li>
-    <li>Vytvorte si lokálnu databázu (SQLite/PostgreSQL) alebo sa pripojte na cvika.dcs.fmph.uniba.sk (návod viď predchádzajúce cvičenia).
+    <li>Vytvorte si lokálnu databázu (SQLite/PostgreSQL) alebo sa pripojte na cvika.dcs.fmph.uniba.sk (návod viď predchádzajúce cvičenia).</li>
 	<li>Stiahnite si nasledujúci súbor:
 		<ul>
 			<li><a href="05/queries_agg.sql">queries_agg.sql</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
@@ -408,7 +411,7 @@ Pracujeme s databázou <a href="db/db3/emp.sql">emp</a>. Vytvorte si súbor wind
 	<li>Vyriešte všetky zadané úlohy.</li>
 </ul>
 
-<h4>Agregácia v datalogu (nie je súčasťou hodnotenia na tomto predmete, ale užitočné pre Úvod do databázových systémov)</h4>
+<h4>Agregácia v datalogu (nie je súčasťou hodnotenia na tomto predmete, ale je to užitočné cvičenie pre Úvod do databázových systémov)</h4>
 <ul>
     <li>Vytvorte si lokálnu databázu (SQLite/PostgreSQL) alebo sa pripojte na cvika.dcs.fmph.uniba.sk, návod viď predchádzajúce cvičenia.
 	<li>Stiahnite si do jedného adresára nasledujúce súbory:
@@ -450,9 +453,9 @@ Pracujeme s databázou <a href="db/db3/emp.sql">emp</a>. Vytvorte si súbor wind
 
 <h4>PostgreSQL</h4>
 <ul>
-	<li>Ako databázový server budeme používať PostgreSQL. Môžete si ho nainštalovať na vlastnom počítači alebo využiť server <tt>cvika</tt>, kde je databáza emp už vytvorená (jej názov je zhodný s prihlasovacím menom užívateľa).</li>
+	<li>Ako databázový server budeme používať PostgreSQL. Môžete si ho nainštalovať na vlastnom počítači alebo využiť server cvika.dcs.fmph.uniba.sk, kde je databáza emp už vytvorená (jej názov je zhodný s prihlasovacím menom užívateľa).</li>
 	<li>Dokumentácia PostgreSQL: <a href="http://www.postgresql.org/docs/current/interactive/index.html">http://www.postgresql.org/docs/current/interactive/index.html</a></li>
-	<li>Pripojte sa cez ssh na <tt>cvika.dcs.fmph.uniba.sk</tt> (username aj password ako do AISu) v dvoch oknách.</li>
+	<li>Pripojte sa cez ssh na cvika.dcs.fmph.uniba.sk (username aj password ako do AISu) v dvoch oknách.</li>
 	<li>V jednom okne editujeme súbor so zadaním, napr. <b>vim queries.sql</b>. Tento súbor si stiahnite napr. pomocou <b>wget &lt;url&gt;</b>.</li>
 	<li>V druhom okne spúšťame výpočet dotazov príkazom 
 		<pre>
@@ -464,7 +467,7 @@ Pracujeme s databázou <a href="db/db3/emp.sql">emp</a>. Vytvorte si súbor wind
 <h4>Práca s interaktívnym terminálom PostgreSQL</h4>
 <ul>
 	<li>Terminál spustíte príkazom <b>psql</b>.</li>
-	<li>Následne môžete písať dotazy (ukončovať bodkočiarkou) a príkazy. Napr. <pre>SELECT * FROM emp;<pre></li>
+	<li>Následne môžete písať dotazy (ukončovať bodkočiarkou) a príkazy. Napr. <pre>SELECT * FROM emp;</pre></li>
 	<li>Príkazy:
         <ul>
             <li><b>\db</b> --- zobrazí zoznam databáz
@@ -472,7 +475,6 @@ Pracujeme s databázou <a href="db/db3/emp.sql">emp</a>. Vytvorte si súbor wind
             <li><b>\d dept</b>, <b>\d+ dept</b> --- zobrazí štruktúru tabuľky
             <li>dokumentácia k psql: <a href="http://www.postgresql.org/docs/current/static/app-psql.html">http://www.postgresql.org/docs/current/static/app-psql.html</a></li>
         </ul>
-	</pre>
 	</li>
 	<li>Tento nástroj je užitočný pre rýchle preverenie stavu databázy a debugovanie (napr. vytvorenie a prezeranie dočasných tabuliek).</li>
 </ul>
@@ -522,9 +524,11 @@ Pracujeme s databázou <a href="db/db3/emp.sql">emp</a>. Vytvorte si súbor wind
 <hr>
 
 
-<h3>Cvičenie 1 (25.9.2019)</h3>
-Dotazy nad databázov EMP. <br>
-	<b><a href="db/db1/cviko1.pdf">krátke slajdy</a></b>
+<h3>Cvičenie 1</h3>
+
+<h4>Prolog</h4>
+<!--
+<b><a href="db/db1/cviko1.pdf">krátke slajdy</a></b>
 	<ul>
 	<li>Skopírujte si súbory z ~rjasko1/db1 do svojho domovského adresára
 	<br><b>cp -r ~rjasko1/db1 ~; cd ~/db1</b></li>	
@@ -582,6 +586,7 @@ Dotazy nad databázov EMP. <br>
 	</ul>
 </li>
 </ul>
+-->
 
 <hr>
 
@@ -593,18 +598,6 @@ Vzorové riešenia niektorých cvičení nájdete <a href="dbvzoraky.html">na te
 <hr>
 -->
 
-<h2>Hodnotenie</h2>
-
-<p>Body sa dajú získať len za domáce úlohy. Tie budú tri, a to za 30, 30 a 40 bodov.
-</p>
-<ul>
-    <li>A --- 90 a viac bodov</li><br/>
-    <li>B --- 80 až 89 bodov</li><br/>
-    <li>C --- 70 až 79 bodov</li><br/>
-    <li>D --- 60 až 69 bodov</li><br/>
-    <li>E --- 50 až 59 bodov</li><br/>
-    <li>Fx --- menej ako 50 bodov</li><br/>
-</ul>
 
 
 </body>

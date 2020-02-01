@@ -21,7 +21,7 @@ clerk(N, Y) :- emp(_, N, clerk, _, Y, _, _).
   
 /* 4. List names and jobs of employees with salary at least 2000. */
 
-/* 5. Print names of employees who were hired between 1981 and 1982. */
+/* 5. Print names of employees who were hired between 1995 and 1998. */
 
 /* 6. Print names and salaries of all managers and analysts. */
 

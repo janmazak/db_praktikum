@@ -1,4 +1,4 @@
-% emp(Employee Number, Name, Job, Superior, Employed from, Salary, Department Number)
+% emp(Employee number, Name, Job, Superior, Employed from, Salary, Department number)
 emp(11, king, president, null, 1990, 5000, 10).
 emp(12, blake, manager, 11, 1992, 2850, 30).
 emp(13, clark, manager, 11, 1993, 1500, 10).
@@ -14,7 +14,7 @@ emp(22, scott, analyst, 13, 1996, 3000, 20).
 emp(23, adams, clerk, 11, 1999, 1100, 20).
 emp(24, miller, clerk, 14, 2000, 1300, 10).
 
-% dept(Department Number, Name, Location)
+% dept(Department number, Name, Location)
 dept(10, accounting, newyork).
 dept(20, research, dallas).
 dept(30, sales, chicago).
