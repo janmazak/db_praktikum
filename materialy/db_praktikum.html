@@ -354,6 +354,10 @@ z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, s
 <ul>
     <li>dokumentácia: <a href="https://www.postgresql.org/docs/current/sql-grant.html">GRANT</a>, <a href="https://www.postgresql.org/docs/current/sql-revoke.html">REVOKE</a></li>
     <li>Prihláste sa na cvika.dcs.fmph.uniba.sk (návod viď predchádzajúce cvičenia) a ripojte sa na databázu "test" (<b>psql test</b>).</li>
+    <li>Užitočné príkazy v psql:<pre>
+        \du
+        \z <tablename>
+        SELECT grantee, privilege_type FROM information_schema.role_table_grants WHERE table_name='test';</pre></li>
     <li>Vytvorte novú tabuľku príkazom <pre>CREATE TABLE test_vasemeno (i INTEGER, t TEXT);</pre> a doplňte do nej niekoľko riadkov: <pre>
     INSERT INTO test_vasemeno VALUES (1, "a"); 
     INSERT INTO test_vasemeno VALUES (2, "b");
