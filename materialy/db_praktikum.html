@@ -19,12 +19,12 @@ Michal Rjaško, rjasko at dcs.fmph.uniba.sk<br/>
 
 <p>Za každú z 3 domácich úloh je max. 30 bodov.</p>
 
-<p>Ďalšie body sa získavajú za riešenie úloh jednotlivých cvičení: za každé cvičenie 0 alebo 1 bod. Z bodov udeľovaných za jednotlivé cvičenia je potrebné na úspešné absolvovanie predmetu získať aspoň 9.</p>
+<p>Ďalšie body sa získavajú za riešenie úloh jednotlivých cvičení: za každé z 12 cvičení 0 alebo 1 bod. Z bodov udeľovaných za jednotlivé cvičenia je potrebné na úspešné absolvovanie predmetu získať aspoň 9.</p>
 
 <p>
-Do 3 dní po každom cvičení treba riešenia odoslať e-mailom na adresu mazak (zavinac) dcs.fmph.uniba.sk. 
+Do 3 dní po každom cvičení treba riešenia zadaných úloh odoslať e-mailom na adresu mazak (zavinac) dcs.fmph.uniba.sk.
 Následne budú riešenia zbežne zhodnotené: v prípade dostatočnosti bude udelený 1 bod, v prípade nedostatočnosti bude študent vyzvaný riešenie doplniť (ak odovzdal aspoň niečo zmysluplné), na čo má ďalšie 3 dni, a potom dostane definitívne hodnotenie.
-Nie je potrebné riešiť všetky úlohy; kritérium je mať (aspoň ako-tak správne) vyriešenú približne tretinu úloh.
+Nie je potrebné riešiť všetky úlohy; kritérium je mať (aspoň ako-tak správne) vyriešenú približne polovicu úloh.
 </p>
 
 
@@ -63,7 +63,7 @@ Nie je potrebné riešiť všetky úlohy; kritérium je mať (aspoň ako-tak spr
 <h4>Query planner (EXPLAIN / ANALYZE)</h4>
 <ul>
     <li>Napriek tomu, že dotazy sa formulujú v deklaratívnych jazykoch (nevieme špecifikovať postup výpočtu), možno sa relačnej databázy opýtať, aký postup bol zvolený. Toto dáva zmysel najmä v prípadoch, keď je výpočet dotazu podstatne pomalší, než by sme očakávali. Zapamätajte si však raz a navždy: v prvom rade sa vždy snažíme o <b><i>vysokú rýchlosť pochopenia zápisu dotazu ľudmi, až potom nás zaujíma rýchlosť výpočtu</i></b> (a aj to zvyčajne len pri dotazoch, ktoré sú kritické, napr. sa vykonávajú veľmi často).
-    <blockquote><i><a href="https://stackify.com/premature-optimization-evil/">Premature optimization is the root of all evil. (D. Knuth)</a></i></blockquote>
+    <blockquote><i><a href="https://stackify.com/premature-optimization-evil/">"Premature optimization is the root of all evil." (D. Knuth)</a></i></blockquote>
     (Aby sme však príliš nezjednodušovali, pozrite si tiež <a href="http://www.joshbarczak.com/blog/?p=580">jeden</a> či <a href="https://dl.acm.org/doi/pdf/10.1145/1569886.1513451?download=true">dva</a> ďalšie pohľady.)
     </li>
     <li>Systém PostgreSQL a tiež niektoré iné umožňujú sledovať plán a rýchlosť výpočtu dotazu pomocou príkazov EXPLAIN a ANALYZE.
@@ -92,11 +92,11 @@ Nie je potrebné riešiť všetky úlohy; kritérium je mať (aspoň ako-tak spr
     explain analyze select * from ab where b = 4 order by b;
         </code></pre>
         <p>Vykonajte posledný príkaz desaťkrát po sebe a sledujte, ako sa mení reálny spotrebovaný čas.</p>
-        <pre><code>        
+        <pre><code>
     explain select * from ab, bc;
     insert into bc select x.id, x.id + 1 from generate_series(1, 1000000) as x(id);
     explain select * from ab, bc;
-        </code></pre>                
+        </code></pre>
         <p>Pozor, ak v poslednom príkaze použijete aj <code>analyze</code>, bude to trvať veľmi dlho (koľko riadkov by malo byť vo výsledku?).</p>
     </li>
     
@@ -165,8 +165,9 @@ https://simplemaps.com/data/world-cities
 
 <h4>Transakcie a izolácia</h4>
 <!-- TODO
-vyskusat BEGIN, COMMIT, ABORT, a co sa stane, ak zacneme transakciu v psql, ale nechame ju neukoncenu --- ostatne tx by nemali vidiet vykonane zmeny
+vyskusat BEGIN, COMMIT, ABORT, a co sa stane, ak zacneme transakciu v psql, ale nechame ju neukoncenu; ostatne tx by nemali vidiet vykonane zmeny
 z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, skusit nejake prelinanie
+dojde k abortu tx, ak delime nulou?
 -->
 
 <hr>
@@ -174,8 +175,8 @@ z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, s
 
 <h4>SQLite</h4>
 <ul>
-    <li><a href="https://www.sqlite.org/about.html" target="_blank">SQLite</a> je databázový systém, ktorý nevyžaduje samostatný server --- beží v rámci výpočtového procesu Vašej aplikácie. Ak chcete vo Vašej aplikácii využiť relačnú databázu a nepotrebujete centralizované úložisko (ktoré by zbieralo dáta z viacerých aplikácií), SQLite je zvyčajne vhodné riešenie. Taktiež sa vo veľkom využíva na testovanie, pri tvorbe prototypov a v úvodnej fáze vývoja aj v prípadoch, keď v produkčnej verzii softvéru bude použitý iný databázový systém.</li>
-    <li><a href="10/sqlite.pdf">prezentácia</a></li>    
+    <li><a href="https://www.sqlite.org/about.html" target="_blank">SQLite</a> je databázový systém, ktorý nevyžaduje samostatný server --- beží v rámci výpočtového procesu Vašej aplikácie. Ak chcete vo Vašej aplikácii využiť relačnú databázu a nepotrebujete centralizované úložisko (ktoré by zbieralo dáta z viacerých aplikácií), SQLite je zvyčajne vhodné riešenie. Taktiež sa vo veľkom využíva na testovanie, pri tvorbe prototypov a v úvodnej fáze vývoja aj v prípadoch, keď v produkčnej verzii softvéru bude použitý iný databázový systém. Vhodné je aj pre zariadenia s obmedzenou výpočtovou či pamäťovou kapacitou (bežne sa využíva napr. v <a href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase">aplikáciách pre Android</a>).</li>
+    <li><a href="10/sqlite.pdf">prezentácia</a></li>
 </ul>
 
 <h4>Pripojenie k databáze z prostredia programovacieho jazyka Java</h4>
@@ -311,7 +312,7 @@ z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, s
             <li>Napíšte dotaz, ktorý vymaže učiteľa z databázy (na základe jeho ID).</li>
         </ul>
         (Evidencia historických dát je jeden z najotravnejších praktických problémov, s ktorými sa pri návrhu databáz stretávame. Pozrite si, hoci len zbežne, <a href="https://docs.microsoft.com/en-us/sql/relational-databases/tables/temporal-tables?view=sql-server-ver15">jedno z možných riešení</a>.)
-    </li>        
+    </li>
     <li>Ďalšie úlohy:
         <ol>
             <li>Zdvojnásobte váhu všetkých známok, ktorých hodnota začína na "5" --- napíšte dotaz.</li>
@@ -328,7 +329,7 @@ z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, s
             <li>
                 Pre každého učiteľa vypočítajte priemer prirodzeno-číselných známok, ktore zadal. Pozor, funkcia AVG potrebuje na vstupe číslo --- potrebujete použiť CAST(... AS INTEGER). Ak to číslo však nebude číslo, vyhlási to chybu. Nečíselné známky odfiltrujte napr. pomocou regulárnych výrazov (napr. konštrukcia WHERE znamka ~ '^[0-9]*$').
             </li>
-        </ol>    
+        </ol>
     </li>
 </ul>
 
@@ -353,10 +354,10 @@ z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, s
 <h4>Prístupové práva</h4>
 <ul>
     <li>dokumentácia: <a href="https://www.postgresql.org/docs/current/sql-grant.html">GRANT</a>, <a href="https://www.postgresql.org/docs/current/sql-revoke.html">REVOKE</a></li>
-    <li>Prihláste sa na cvika.dcs.fmph.uniba.sk (návod viď predchádzajúce cvičenia) a ripojte sa na databázu "test" (<b>psql test</b>).</li>
+    <li>Prihláste sa na cvika.dcs.fmph.uniba.sk (návod viď predchádzajúce cvičenia) a pripojte sa na databázu "test" (<b>psql test</b>).</li>
     <li>Užitočné príkazy v psql:<pre>
         \du
-        \z <tablename>
+        \z tablename
         SELECT grantee, privilege_type FROM information_schema.role_table_grants WHERE table_name='test';</pre></li>
     <li>Vytvorte novú tabuľku príkazom <pre>CREATE TABLE test_vasemeno (i INTEGER, t TEXT);</pre> a doplňte do nej niekoľko riadkov: <pre>
     INSERT INTO test_vasemeno VALUES (1, "a"); 
@@ -368,7 +369,7 @@ z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, s
     <li>Povoľte spolužiakovi vkladať do tabuľky test_vasemeno riadky tak, aby mohol toto oprávnenie prideliť iným. Vyskúšajte: nech pridelí toto oprávnenie role test. Potom mu odoberte možnosť prideliť toto oprávnenie iným (REVOKE GRANT OPTION FOR) tak, aby stále sám mohol vkladať riadky. Požiadajte ho, nech vyskúša, či to funguje.</li>
     <li>Vyskúšajte možnosť kaskádovitého odobratia oprávnenia (pozri CASCADE na stránke <a href="http://www.postgresql.org/docs/9.1/static/sql-revoke.html">http://www.postgresql.org/docs/9.1/static/sql-revoke.html</a>).</li>
     <li>Odoberte spolužiakom a testovacej role všetky oprávnenia, ktoré ste im udelili (REVOKE ALL PRIVILEGES FROM).</li>
-    <li>Zbežne si pozrite <a href="https://www.postgresql.org/docs/9.1/auth-methods.html">možnosti prihlasovania</a> k databáze, aby ste si vytvorili predstavu o súčasných technológiách. (Nie, nebudeme to vyžadovať na žiadnej skúške.)</li>
+    <li>Zbežne si pozrite <a href="https://www.postgresql.org/docs/9.1/auth-methods.html">možnosti autentifikácie</a> pri prihlasovaní k databáze, aby ste si vytvorili predstavu o súčasných technológiách. (Nie, nebudeme to vyžadovať na žiadnej skúške.)</li>
 </ul>
 
 <hr>
@@ -434,17 +435,22 @@ z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, s
 
 <h4>SQL</h4>
 <ul>
-    <li><a href="04/sql.pdf">prezentácia</a></li>    
+    <li><a href="04/sql.pdf">prezentácia</a></li>
 	<li>Stiahnite si do jedného adresára nasledujúce súbory:
 		<ul>
 			<li><a href="04/emp.sql">emp.sql</a> --- príkazy v SQL vytvárajúce databázu zamestnancov</li>		
 			<li><a href="04/queries.sql">queries.sql</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
 		</ul>
 	</li>
+</ul>
+
+<h4>SQLite</h4>
+
+<ul>
 	<li>Najprv vyskúšame pracovať s databázou <a href="https://www.sqlite.org/about.html">SQLite</a>, ktorá sa celá nachádza v jednom súbore na disku a nevyžaduje žiadnu konfiguráciu.
         <ol>
             <li>Vytvorte databázu príkazom <pre>sqlite3 --init emp.sql emp.db</pre></li>
-            <li>Overte, že databáza vznikla a obsahuje zmysluplné dáta: <pre>sqlitebrowser emp.db &amp;</pre></li>
+            <li>Overte, že databáza vznikla a obsahuje zmysluplné dáta: <pre>sqlitebrowser emp.db &amp;</pre> alebo spustením <pre>sqlite3 emp.db</pre> <pre>SELECT * FROM emp;</pre></li>
             <li>Vyskúšajte výpočet dotazov: <pre>sqlite3 emp.db &lt; queries.sql</pre>
             (Na výpočet dotazu môžete tiež využiť záložku Execute SQL v <a href="https://sqlitebrowser.org/">sqlitebrowseri</a>.)</li>
             <li>Postupne do súboru <b>queries.sql</b> dopĺňajte požadované dotazy a priebežne kontrolujte ich správnosť.            
@@ -461,7 +467,7 @@ z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, s
 	<li>Dokumentácia PostgreSQL: <a href="http://www.postgresql.org/docs/current/interactive/index.html">http://www.postgresql.org/docs/current/interactive/index.html</a></li>
 	<li>Pripojte sa cez ssh na cvika.dcs.fmph.uniba.sk (username aj password ako do AISu) v dvoch oknách.</li>
 	<li>V jednom okne editujeme súbor so zadaním, napr. <b>vim queries.sql</b>. Tento súbor si stiahnite napr. pomocou <b>wget &lt;url&gt;</b>.</li>
-	<li>V druhom okne spúšťame výpočet dotazov príkazom 
+	<li>V druhom okne spúšťame výpočet dotazov príkazom
 		<pre>
             psql -f queries.sql
 		</pre>
@@ -490,7 +496,7 @@ z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, s
 <ul>
 	<li>Stiahnite si do jedného adresára nasledujúce súbory:
 		<ul>
-			<li><a href="03/queries_library.pl">queries.pl</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
+			<li><a href="03/queries_library.pl">queries_library.pl</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
 			<li><a href="03/query.pl">query.pl</a> --- pomocný súbor obsahujúci definíciu príkazu <b>q(_)</b> na formátovanie výsledkov dotazov</li>
 		</ul>
 	</li>
@@ -502,6 +508,7 @@ z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, s
 
 <hr>
 <h3>Cvičenie 2</h3> 
+
 <h4>Datalog</h4>
 <ul>
     <li><a href="02/datalog.pdf">prezentácia</a></li>
@@ -512,18 +519,7 @@ z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, s
 			<li><a href="02/query.pl">query.pl</a> --- pomocný súbor obsahujúci definíciu príkazu <b>q(_)</b> na formátovanie výsledkov dotazov</li>
 		</ul>
 	</li>
-	<li>Na interpretáciu datalogových dotazov budeme používať SWI-prolog: spusťte <br><b>swipl -s queries.pl</b></li>
-	<li>V inom okne editujte súbor <b>zadanie.pl</b>; odporúčame editory vim (pre konzolové prostredie) alebo kwrite (grafický mód).
-	<li>Odporúčame mať v ďalšom okne otvorenú databázu (súbor <b>emp.pl</b> so zoznamom faktov), aby ste mohli kontrolovať výsledky dotazov.
-	<li>Po každej úprave súboru <b>zadanie.pl</b> (nezabudnite uložiť zmeny) spusťte v bežiacom SWI-prologu príkaz <br><b>make.</b><br> (aj s bodkou na konci, príkazy píšeme za otáznik). Preverte, či kompilátor nehlási chyby.</li>
-	<li>Výpočet dotazu (v tomto príklade pre predikát <b>job</b>) spustíme takto: <br><b>q(job(J)).</b><br> Na názve premenných nezáleží, miesto J možno použiť trebárs _, musí však sedieť arita (počet argumentov). Predikát <b>q()</b> slúži na "pekné" formátovanie výstupu a elimináciu zdanlivých duplikátov.
-	<li>Praktické rady k SWI-prologu:
-        <ul>
-            <li>Reťazce začínajúce veľkým písmenom systém pokladá za premenné. Konštanty sa začínajú malými písmenami. Ak to popletiete, bude to dávať podivne zlé výsledky.</li>
-            <li>Na vyhodnocovanie aritmetických výrazov slúži operátor is, čiže napr. <b>X is 2+3</b>, nie <b>X = 2+3</b> (v tom druhom prípade symbol = bude interpretovaný ako unifikácia termov a nedôjde k žiadnej aritmetickej operácii).</li>
-            <li>Na porovnávanie čísel slúžia operátory <b>&lt;</b>, <b>=&lt;</b>, <b>&gt;</b>, <b>&gt;=</b>.
-        </ul>
-    </li>
+    <li>Podľa návodu z minulého cvičenia (alebo "Práca s datalogom" v <a href="02/datalog.pdf">prezentácii</a>) vyriešte úlohy v <i>queries.pl</i>.
 </ul>
 <hr>
 
@@ -531,66 +527,46 @@ z Javy otvorit dve pripojenia, potom mame kontrolu nad tym, co sa kedy vykona, s
 <h3>Cvičenie 1</h3>
 
 <h4>Prolog</h4>
-<!--
-<b><a href="db/db1/cviko1.pdf">krátke slajdy</a></b>
-	<ul>
-	<li>Skopírujte si súbory z ~rjasko1/db1 do svojho domovského adresára
-	<br><b>cp -r ~rjasko1/db1 ~; cd ~/db1</b></li>	
-	<li>Adresár obsahuje 3 súbory:
-		<ul>
-			<li><a href="db/db1/query.pl">query.pl</a> - Pomocný súbor obsahujúci definíciu príkazu q(_) na formátovanie výsledkov dotazov</a></li>
-			<li><a href="db/db1/emp.pl">emp.pl</a> --- databáza zamestnancov EMP</a></li>
-			<li><a href="db/db1/queries_emp.pl">queries_emp.pl</a> - Súbor obsahujúci zoznam dotazov, ktoré máte vypracovať. Tento súbor budete editovať</a></li>
-		</ul>
-	</li>
-	<li>V jednom okne spustite datalogovské prostredie príkazom <b>swipl -s queries_emp.pl</b></li>
-	<li>V druhom okne editujte súbor queries_emp.pl, napr. pomocou <b>vim queries_emp.pl</b></li>
-	<li><h3>Datalog</h3>
-	<h4>Práca s prostredím</h4>
-	Prostredie, v ktorom budeme na cvičeniach pracovať beží na serveri cvika.dcs.fmph.uniba.sk. T.j. treba sa: 
-		<ul>	
-			<li>Pripojit cez ssh na pocitac cvika (cvika.dcs.fmph.uniba.sk). To znamena 
-			pod Linuxom otvorit terminalove okno a urobit<br>
-			<b>ssh <em>username</em>@cvika</b>,
-			pod Windowsami treba pouzit putty. V tomto okne sa odohrava vsetko
-			ostatne. Username a heslo su 
-			identicke s tymi v terminalke.
-			</li>
-			
-			<li>Je rozumne vyrobit cca. 3 take okna a v kazdom byt prihlaseny na
-			pocitaci cvika. 
-			</li>
-			
-			<li>Na pocitaci cvika, skopirovat subory pre dane cvicenie, napr.
-			z ~rjasko1/db1 do svojho home-directory na pocitaci cvika:
-			<br><b>cp -r ~rjasko1/db1 ~; cd ~/db1</b></li>				
-			
-			<li>V jednom okne editujete súbor v ktorom píšete dotazy, napr.
-			<br><b>vim queries_emp.pl</b></li>
-			<li>V druhom okne máte spustené prostredie prologu:<br>
-			<b>swipl -s queries_emp.pl</b></li>
-			<li>Po vpisani dotazu do suboru v OKNE1 treba subor queries_emp.pl ulozit na
-			disk (v editore vim sa tak urobi postupnym stlacenim "ESC" a ":w").
-			Nasledne v OKNE2 skompilujete novu verziu suboru prikazom
-			<br><b>make.</b>
-			<br>(Je dobre pozriet sa, ci kompilator hlasi nejake errors. Ak ano, treba
-			sa vratit do editora, odstranit chyby a kompilaciu zopakovat. Kompilator dost
-			dobre napoveda, kde ste urobili chybu.)
-			<br> Potom sa za ten otaznik v OKNE2 daju pisat dotazy ako napriklad
-			<br><b>?- q(job(J)).</b>
-			<br>Predikat "q(_)" sluzi na pekne formatovanie vystupu a eliminaciu 
-			"duplikatov" (ktore v skutocnosti nie su duplikatmi, len tymi istymi 
-			viacnasobne najdenymi N-ticami)
-			</li>
-		</ul>	
-	<h4>Praktické rady k SWI-prologu / Datalogu</h4>
-	<ul>
-	<li>Reťazce začínajúce veľkým písmenom systém pokladá za premenné. Konštanty sa začínajú malými písmenami. Ak to popletiete, bude to dávať podivne zlé výsledky.</li>
-	<li>Na vyhodnocovanie aritmetických výrazov slúži operátor is, čiže napr. X is 2+3, nie X = 2+3 (v tom druhom prípade symbol = bude interpretovaný ako unifikácia termov a nedôjde k žiadnej aritmetickej operácii). </li>
-	</ul>
-</li>
+
+<ul>
+    <li>Na prvé pokusy využijeme online prostredie pre <a href="https://swish.swi-prolog.org/">SWI-Prolog</a>.</li>
+    <li><a href="prolog.pdf">prezentácia</a> (prelistujte si prípadne aj <a href="https://staff.fnwi.uva.nl/u.endriss/teaching/prolog/prolog.pdf">obsiahlejší nenáročný materiál</a>)</li>
+    <li>Úlohy:
+        <ol>
+            <li>Zadefinujte niekoľko faktov o rodinných vzťahoch pomocou predikátov <i>male/1</i>, <i>female/1</i>, <i>parent/2</i> (číslo udáva aritu).</li>
+            <li>Zapíšte pravidlá pre predikáty vyjadrujúce otca, sestru, starú mamu, bratranca.</li>
+            <li>Vytvorte predikát <i>ancestor/2</i> pre vzťah "byť predkom" ().</li>
+            <li>Vytvorte predikát <i>related/2</i> pre vzťah "byť pokrvným príbuzným".</li>
+        </ol>
+    </li>
 </ul>
--->
+
+<h4>Datalog na serveri <i>cvika</i></h4>
+
+<ul>
+    <li>Prihláste sa na server <i>cvika.dcs.fmph.uniba.sk</i> pomocou ssh (<a href="https://www.ssh.com/ssh/command/#using-the-linux-client">linux</a>, <a href="https://www.ssh.com/ssh/putty/windows/">windows (PuTTY)</a>).
+    <li>Pomocou <a href="https://www.gnu.org/software/wget/manual/wget.html">wget</a> si stiahnite potrebné súbory:
+        <ul>
+            <li><a href="01/query.pl">query.pl</a> --- pomocný súbor obsahujúci definíciu príkazu q(_) na formátovanie výsledkov dotazov</li>
+            <li><a href="01/emp.pl">emp.pl</a> --- databáza zamestnancov EMP</li>
+            <li><a href="01/queries.pl">queries.pl</a> --- Súbor obsahujúci zoznam dotazov, ktoré máte vypracovať. Tento súbor budete editovať.</li>
+        </ul>
+        Aj keď to na týchto cvičeniach nebudeme potrebovať, silne odporúčame naučiť sa tiež pracovať s nástrojmi <a href="https://linuxtechlab.com/files-transfer-scp-rsync-commands/">scp, rsync</a> a vyskúšať si prihlasovanie pomocou <a href="https://www.ssh.com/ssh/key/">súboru s kľúčom</a> miesto hesla.
+    </li>
+    <li style="list-style:none;">&nbsp;</li>
+    <li>Na interpretáciu datalogových dotazov budeme používať SWI-prolog: spusťte <br><b>swipl -s queries.pl</b></li>
+	<li>V inom okne editujte súbor <b>queries.pl</b>; odporúčame editory vim (pre konzolové prostredie) alebo kwrite (grafický mód, ak pracujete na lokálnom počítači v M217).
+	<li>Odporúčame mať v ďalšom okne otvorenú databázu (súbor <b>emp.pl</b> so zoznamom faktov), aby ste mohli kontrolovať výsledky dotazov.
+	<li>Po každej úprave súboru <b>queries.pl</b> (nezabudnite uložiť zmeny) spusťte v bežiacom SWI-prologu príkaz <br><b>make.</b><br> (aj s bodkou na konci, príkazy píšeme za otáznik). Preverte, či kompilátor nehlási chyby.</li>
+	<li>Výpočet dotazu (v tomto príklade pre predikát <b>job</b>) spustíme takto: <br><b>q(job(J)).</b><br> Na názve premenných nezáleží, miesto J možno použiť trebárs _, musí však sedieť arita (počet argumentov). Predikát <b>q()</b> slúži na "pekné" formátovanie výstupu a elimináciu zdanlivých duplikátov.
+	<li>Praktické rady k SWI-prologu:
+        <ul>
+            <li>Reťazce začínajúce veľkým písmenom systém pokladá za premenné. Konštanty sa začínajú malými písmenami. Ak to popletiete, bude to dávať podivne zlé výsledky.</li>
+            <li>Na vyhodnocovanie aritmetických výrazov slúži operátor <b>is</b>, čiže napr. <b>X is 2+3</b>, nie <b>X = 2+3</b> (v tom druhom prípade symbol = bude interpretovaný ako unifikácia termov a nedôjde k žiadnej aritmetickej operácii).</li>
+            <li>Na porovnávanie čísel slúžia operátory <b>&lt;</b>, <b>=&lt;</b>, <b>&gt;</b>, <b>&gt;=</b>.
+        </ul>
+    </li>
+</ul>
 
 <hr>
 

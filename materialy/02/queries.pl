@@ -11,40 +11,38 @@
 /* Write and test the following queries ----------------------------------- */
 /* ------------------------------------------------------------------------ */
 
-/* 1. Print all jobs. */
-job(J) :- emp(_, _, J, _, _, _, _).
-
-/* 2. Print names and hiring years of all clerks. */
-clerk(N, Y) :- emp(_, N, clerk, _, Y, _, _).
-
-/* 3. List names and jobs of all employees. */
+/* 1. List names and jobs of all employees. */
   
-/* 4. List names and jobs of employees with salary at least 2000. */
+/* 2. List names and jobs of employees with salary at least 2000. */
 
-/* 5. Print names of employees who were hired between 1995 and 1998. */
+/* 3. Print names of employees who were hired between 1995 and 1998. */
 
-/* 6. Print names and salaries of all managers and analysts. */
+/* 4. Print names and salaries of all managers and analysts. */
 
-/* 7. Print the name of the department in which the president works. */
+/* 5. Print the name of the department in which the president works. */
 
-/* 8. Print jobs of employees who work in Chicago. */
+/* 6. Print jobs of employees who work in Chicago. */
 
-/* 9. For each employee, print a list of all coworkers, that is, list all tuples [Employee name, Locations, Coworker]. */
+/* 7. For each employee, print a list of all coworkers, that is, list all tuples [Employee name, Locations, Coworker]. */
 
-/* 10. Print names of employees together with names of their managers. */
+/* 8. Print names of employees together with names of their managers. */
 
-/* 11. Find the lowest salary in New York. */
+/* 9. Find the lowest salary in New York. */
 
-/* 12. Print names, department names and salaries of all employees whose salary is greater than the lowest salary in department 20. */
+/* 10. Print names, department names and salaries of all employees whose salary is greater than the lowest salary in department 20. */
 
-/* 13. Which departments contain all job positions? */
+/* Check whether all the rules you have used so far are safe. */
 
-/* 14. Which departments are empty (have no employees)? */
+/* 11. Which departments contain all job positions? */
 
-/* 15. Which employees manage only clerks? */
+/* 12. Which departments are empty (have no employees)? */
 
-/* 16. Which departments employ no salesmen? */
+/* 13. Which employees manage only clerks? */
 
-/* 17. Find names of all employees who are subordinates of Blake (both direct and indirect). */
+/* 14. Which departments employ no salesmen? */
 
-/* 18. Determine if there are two employees having the same wage. */
+/* 15. Find names of all employees who are subordinates of Blake (both direct and indirect). */
+
+/* 16. Determine if there are two employees having the same wage. */
+
+/* Check whether all the rules you have used are safe. */
