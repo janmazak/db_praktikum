@@ -539,6 +539,30 @@ dojde k abortu tx, ak delime nulou?
             <li>Vytvorte predikát <i>related/2</i> pre vzťah "byť pokrvným príbuzným".</li>
         </ol>
     </li>
+
+    <li>
+        <p>Dajte si pozor na typické chyby pri predikáte related/2.</p>
+        <ol>
+            <li>
+                <p>Obmedzenie pokrvného príbuzenstva na predtým definované jednoduché vzťahy (parent, sibling, grandma apod.), alebo iné nepochopenie vzťahu pokrvného príbuzenstva.</p>
+                <p><i>Náprava:</i> Ak si pri nejakom pojme nie ste úplne istí významom, alebo je to právny pojem definovaný v konkrétnej legislatíve, alebo ste s týmto pojmom dlho či nikdy nepracovali, overte si definíciu (najlepšie z aspoň dvoch nezávislých zdrojov.)</p>
+            </li>
+            <li>
+                <p>Definovanie related iba pomocou spoločného predka. Ak to spravíte nešikovne, váš predikát nebude pokrývať priamu líniu (ak je niekto potomkom iného, ale žiaden ich spoločný predok už nie je v databáze).</p>
+                <p><i>Náprava:</i> Definovať ancestor tak, aby každý bol aj predkom samého seba, to je však asi neželané pre všetky ostatné účely (ale často dobre funguje v matematike, napr. vzdialenosť vrchola grafu od samého seba je 0). Iná možnosť je rozlíšiť viacero prípadov a priamu líniu riešiť osobitne.</p>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <p>Ak sa vám darí produkovať veľa chýb, mali by ste venovať zvýšenú pozornosť procesu, ktorý na elimináciu chýb používate. Môžete si napríklad spísať checklist s položkami ako</p>
+        <ul>
+            <li>sú všetky použité pravidlá bezpečné?</li>
+            <li>čo sú okrajové prípady? riešim všetky?</li>
+            <li>preveril som správnosť pomocných pravidiel?</li>
+            <li>obsahuje testovacia sada dostatok dát na pokrytie všetkých prípadov?</li>
+            <li>využívam všetky pomocné pravidlá? nedá sa niektoré eliminovať dosadením tela na miesto použitia?</li>
+        </ul>
+    </li>
 </ul>
 
 <h4>Datalog na serveri <i>cvika</i></h4>
