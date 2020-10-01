@@ -43,6 +43,8 @@
 
 /* 15. Find names of all employees who are subordinates of Blake (both direct and indirect). */
 
-/* 16. Determine if there are two employees having the same wage. */
+/* 16. Determine if all the departments have a pair of employees earning the same wage. */
+
+/* 17. Determine if all the departments have exactly two possible salary grades (the set of all salaries has two elements). */
 
 /* Check whether all the rules you have used are safe. */
