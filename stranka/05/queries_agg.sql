@@ -4,24 +4,22 @@
 
 /* 1. Find the number of employees who work in Dallas. */
 
-SELECT COUNT(DISTINCT e.empno)
-FROM emp e, dept d
-WHERE e.deptno = d.deptno and d.location = 'Dallas';
-
 /* 2. Find the average salary of employees who work in Dallas. */
 
-/* 3. For each department, including departments with no employees, find the sum of salaries of all employees who work in that department. */
+/* 3. For each department, including departments with no employees, find the sum of salaries of all employees who work in that department. (Try two different approaches: via UNION, and with COALESCE.) */
 
 /* 4. Find departments (deptno) with more than 3 employees. */
 
-/* 5. For each department, find the number of analysts who work in that department. */
+/* 5. Find tuples [D, J, Sum, Average] which, for each pair [D, J], state the sum of salaries and average salary of employees who work in department D and do job J. */
 
-/* 6. Find the jobs with the maximal standard deviation of salaries. */
+/* 6. For each department, find the number of analysts who do not work in that department. */
 
-/* 7. Find tuples [D, J, Sum, Average] which, for each pair [D, J], state the sum of salaries and average salary of employees who work in department D and do job J. */
+/* 7. Find the jobs with the maximal standard deviation of salaries. */
 
-/* 8. Find tuples [Y, N], where N is number of employees hired in the year Y (the resuslt contains only years when an employee was hired) */
+/* 8. Find the departments with the second highest average salary. (Careful: there might be more departments having the same average salary.) */
 
-/* 9. For each year since 1990, find number of employees hired in that year (the resuslt must contain also years when no employee was hired). Hint: use PostgreSQL function generate_series(). */
+/* 9. Find tuples [Y, N] where N is the number of employees hired in the year Y (the result should contain only years when an employee was hired). */
 
-/* 10. For each employee, find the number of subordinates (both direct and indirect) of that employee. Include employees with no subordinates. */
+/* 10. For each year since 1990, find the number of employees hired in that year (the result must also contain years when no employee was hired). Hint: use the PostgreSQL function generate_series(). */
+
+/* 11. For each employee, find the number of subordinates (both direct and indirect) of that employee. Include employees with no subordinates. */
