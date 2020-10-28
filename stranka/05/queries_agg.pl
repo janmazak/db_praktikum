@@ -32,7 +32,7 @@ nr_emp_dallas(N) :-
 
 /* 5. Find tuples [D, J, Sum, Average] which, for each pair [D, J], state the sum of salaries and average salary of employees who work in department D and do job J. */
 
-/* 6. For each department, find the number of analysts who do not work in that department. */
+/* 6. For each department, find the number of analysts who do not work in that department (include departments with 0, too). */
 
 /* 7. Find the jobs with the maximal standard deviation of salaries. */
 
