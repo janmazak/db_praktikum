@@ -2,9 +2,9 @@
 <html lang="sk">
 
 <head>
-	<title>Praktické cvičenia z databáz</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-	<link rel="stylesheet" href="rjasko.css"/>
+    <title>Praktické cvičenia z databáz</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <link rel="stylesheet" href="rjasko.css"/>
 </head>
 <body style="background-repeat:no-repeat;background-position:top right;">
 
@@ -42,10 +42,10 @@ Nie je potrebné riešiť všetky úlohy; kritérium je mať (aspoň ako-tak spr
 <h4>Domáca úloha č. 1</h4>
 
 <ul>
-	<li><a href="du1/du1.pdf">zadanie</a></li>
-	<li><a href="du1/du1_test_data.zip">testovacia databáza</a></li>
-	<li>odovzdať do 26. 10.</li>
-<!--	<li><a href="hodnotenie.pdf">hodnotenie</a></li> -->
+    <li><a href="du1/du1.pdf">zadanie</a></li>
+    <li><a href="du1/du1_test_data.zip">testovacia databáza</a></li>
+    <li>odovzdať do 26. 10.</li>
+<!--    <li><a href="hodnotenie.pdf">hodnotenie</a></li> -->
 </ul>
 
 <hr>
@@ -279,7 +279,7 @@ dojde k abortu tx, ak delime nulou?
             <li><a href="http://www.postgresql.org/docs/current/static/sql-createdatabase.html">CREATE DATABASE</a></li>
             <li><a href="http://www.postgresql.org/docs/current/static/sql-dropdatabase.html">DROP DATABASE</a></li>
         </ul>
-	</li>
+    </li>
     <li>Chceme založiť databázu pre evidenciu známok, študentov a učiteľov na strednej škole. Potrebujeme evidovať nasledovné:
         <ul>
             <li>Študent --- meno, priezvisko, pohlavie, trieda, dátum narodenia</li>
@@ -373,22 +373,30 @@ dojde k abortu tx, ak delime nulou?
     <li>Napíšte rekurzívny dotaz, ktorý vypočíta hodnotu n! (faktoriál) pre n = 10.</li>
     <li>Napíšte rekurzívny dotaz, ktorý vypočíta hodnotu 30. Fibonacciho čísla.</li>
     <li>Uvažujme databázu zamestnancov, ktorú sme používali na predošlých cvičeniach. Nájdite ku každému manažérovi zoznam jeho podriadených a ku každému podriadenému uveďte, či je priamy alebo nepriamy.</li>
-    <li>Vytvorte si databázu ciest medzi mestami (<a href="06/world.sql">roads.sql</a>) a napíšte dotaz, ktorý zistí, (a) odkiaľ sa dá dostať do Ríma; (b) odkiaľ sa dá dostať do Ríma po prejdení najviac 1000 km.</li>
+    <li>Vytvorte si databázu ciest medzi mestami (<a href="06/world.sql">roads.sql</a>, importovať ju možno príkazom <tt>psql -f roads.sql</tt>) a napíšte dotaz, ktorý zistí, 
+        <ol>
+            <li>odkiaľ sa dá dostať do Ríma;</li>
+            <li>odkiaľ sa dá dostať do Ríma po prejdení najviac 1000 km.</li>
+            <li>Kamionista prejde za jeden deň maximálne 720 km. Vytvorte tabuľku dvojíc <code>[mesto, pocet_dni, pocet_miest]</code>,
+                kde <code>pocet_miest</code> určuje počet miest, do ktorých za dá dostať z mesta <code>mesto</code> za <code>pocet_dni</code> dní.
+            </li>
+        </ol>
+    </li>
 </ul>
 
 <h4>Agregácia v SQL</h4>
 <ul>
     <li>Vytvorte si lokálnu databázu (SQLite/PostgreSQL) alebo sa pripojte na cvika.dcs.fmph.uniba.sk (návod viď predchádzajúce cvičenia).
-	<li>Stiahnite si nasledujúce súbory:
-		<ul>
-			<li><a href="06/world.sql">world.sql</a> --- definícia databázovej schémy a dáta</li>
-			<li><a href="06/queries_world.sql">queries_world.sql</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
-		</ul>
-	</li>
+    <li>Stiahnite si nasledujúce súbory:
+        <ul>
+            <li><a href="06/world.sql">world.sql</a> --- definícia databázovej schémy a dáta</li>
+            <li><a href="06/queries_world.sql">queries_world.sql</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
+        </ul>
+    </li>
     <li>Naimportujte si databázu world:
         <pre>psql -f world.sql</pre>
     </li>
-	<li>Vyriešte všetky zadané úlohy.</li>
+    <li>Vyriešte všetky zadané úlohy.</li>
 </ul>
 
 <hr>
@@ -398,25 +406,25 @@ dojde k abortu tx, ak delime nulou?
 <ul>
     <li><a href="05/sql_agg.pdf">prezentácia</a></li>
     <li>Vytvorte si lokálnu databázu (SQLite/PostgreSQL) alebo sa pripojte na cvika.dcs.fmph.uniba.sk (návod viď predchádzajúce cvičenia).</li>
-	<li>Stiahnite si nasledujúci súbor:
-		<ul>
-			<li><a href="05/queries_agg.sql">queries_agg.sql</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
-		</ul>
-	</li>
-	<li>Vyriešte všetky zadané úlohy.</li>
+    <li>Stiahnite si nasledujúci súbor:
+        <ul>
+            <li><a href="05/queries_agg.sql">queries_agg.sql</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
+        </ul>
+    </li>
+    <li>Vyriešte všetky zadané úlohy.</li>
 </ul>
 
 <h4>Agregácia v datalogu (nie je súčasťou hodnotenia na tomto predmete, ale je to užitočné cvičenie pre Úvod do databázových systémov)</h4>
 <ul>
-	<li>Stiahnite si do jedného adresára nasledujúce súbory:
-		<ul>
-			<li><a href="05/emp.pl">emp.pl</a> --- databáza zamestnancov</li>
-			<li><a href="05/subtotal.pl">subtotal.pl</a> --- pomocný súbor obsahujúci implementáciu predikátu <b>subtotal</b> v SWI-prologu</li>
-			<li><a href="05/query.pl">query.pl</a> --- pomocný súbor obsahujúci definíciu príkazu <b>q(_)</b> na formátovanie výsledkov dotazov</li>
-			<li><a href="05/queries_agg.pl">queries_agg.pl</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
-		</ul>
-	</li>
-	<li>Vyriešte všetky zadané úlohy.</li>
+    <li>Stiahnite si do jedného adresára nasledujúce súbory:
+        <ul>
+            <li><a href="05/emp.pl">emp.pl</a> --- databáza zamestnancov</li>
+            <li><a href="05/subtotal.pl">subtotal.pl</a> --- pomocný súbor obsahujúci implementáciu predikátu <b>subtotal</b> v SWI-prologu</li>
+            <li><a href="05/query.pl">query.pl</a> --- pomocný súbor obsahujúci definíciu príkazu <b>q(_)</b> na formátovanie výsledkov dotazov</li>
+            <li><a href="05/queries_agg.pl">queries_agg.pl</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
+        </ul>
+    </li>
+    <li>Vyriešte všetky zadané úlohy.</li>
 </ul>
 
 <hr>
@@ -425,18 +433,18 @@ dojde k abortu tx, ak delime nulou?
 <h4>SQL</h4>
 <ul>
     <li><a href="04/sql.pdf">prezentácia</a></li>
-	<li>Stiahnite si do jedného adresára nasledujúce súbory:
-		<ul>
-			<li><a href="04/emp.sql">emp.sql</a> --- príkazy v SQL vytvárajúce databázu zamestnancov</li>
-			<li><a href="04/queries.sql">queries.sql</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
-		</ul>
-	</li>
+    <li>Stiahnite si do jedného adresára nasledujúce súbory:
+        <ul>
+            <li><a href="04/emp.sql">emp.sql</a> --- príkazy v SQL vytvárajúce databázu zamestnancov</li>
+            <li><a href="04/queries.sql">queries.sql</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
+        </ul>
+    </li>
 </ul>
 
 <h4>SQLite</h4>
 
 <ul>
-	<li>Najprv vyskúšame pracovať s databázou <a href="https://www.sqlite.org/about.html">SQLite</a>, ktorá sa celá nachádza v jednom súbore na disku a nevyžaduje žiadnu konfiguráciu.
+    <li>Najprv vyskúšame pracovať s databázou <a href="https://www.sqlite.org/about.html">SQLite</a>, ktorá sa celá nachádza v jednom súbore na disku a nevyžaduje žiadnu konfiguráciu.
         <ol>
             <li>Vytvorte databázu príkazom <pre>sqlite3 --init emp.sql emp.db</pre> prípadne
                 <pre>sqlite3 emp.db &lt; emp.sql</pre>
@@ -454,30 +462,30 @@ dojde k abortu tx, ak delime nulou?
 
 <h4>PostgreSQL</h4>
 <ul>
-	<li>Ako databázový server budeme používať PostgreSQL. Môžete si ho nainštalovať na vlastnom počítači alebo využiť server cvika.dcs.fmph.uniba.sk, kde je databáza emp už vytvorená (jej názov je zhodný s prihlasovacím menom užívateľa).</li>
-	<li>Dokumentácia PostgreSQL: <a href="http://www.postgresql.org/docs/current/interactive/index.html">http://www.postgresql.org/docs/current/interactive/index.html</a></li>
-	<li>Pripojte sa cez ssh na cvika.dcs.fmph.uniba.sk (username aj password ako do AISu) v dvoch oknách.</li>
-	<li>V jednom okne editujeme súbor so zadaním, napr. <b>vim queries.sql</b>. Tento súbor si stiahnite napr. pomocou <b>wget &lt;url&gt;</b>.</li>
-	<li>V druhom okne spúšťame výpočet dotazov príkazom
-		<pre>
+    <li>Ako databázový server budeme používať PostgreSQL. Môžete si ho nainštalovať na vlastnom počítači alebo využiť server cvika.dcs.fmph.uniba.sk, kde je databáza emp už vytvorená (jej názov je zhodný s prihlasovacím menom užívateľa).</li>
+    <li>Dokumentácia PostgreSQL: <a href="http://www.postgresql.org/docs/current/interactive/index.html">http://www.postgresql.org/docs/current/interactive/index.html</a></li>
+    <li>Pripojte sa cez ssh na cvika.dcs.fmph.uniba.sk (username aj password ako do AISu) v dvoch oknách.</li>
+    <li>V jednom okne editujeme súbor so zadaním, napr. <b>vim queries.sql</b>. Tento súbor si stiahnite napr. pomocou <b>wget &lt;url&gt;</b>.</li>
+    <li>V druhom okne spúšťame výpočet dotazov príkazom
+        <pre>
             psql -f queries.sql
-		</pre>
-	</li>
+        </pre>
+    </li>
 </ul>
 
 <h4>Práca s interaktívnym terminálom PostgreSQL</h4>
 <ul>
-	<li>Terminál spustíte príkazom <b>psql</b>.</li>
-	<li>Následne môžete písať dotazy (ukončovať bodkočiarkou) a príkazy. Napr. <pre>SELECT * FROM emp;</pre></li>
-	<li>Príkazy:
+    <li>Terminál spustíte príkazom <b>psql</b>.</li>
+    <li>Následne môžete písať dotazy (ukončovať bodkočiarkou) a príkazy. Napr. <pre>SELECT * FROM emp;</pre></li>
+    <li>Príkazy:
         <ul>
             <li><b>\db</b> --- zobrazí zoznam databáz
             <li><b>\d</b> --- zobrazí zoznam tabuliek v databáze
             <li><b>\d dept</b>, <b>\d+ dept</b> --- zobrazí štruktúru tabuľky
             <li>dokumentácia k psql: <a href="http://www.postgresql.org/docs/current/static/app-psql.html">http://www.postgresql.org/docs/current/static/app-psql.html</a></li>
         </ul>
-	</li>
-	<li>Tento nástroj je užitočný pre rýchle preverenie stavu databázy a debugovanie (napr. vytvorenie a prezeranie dočasných tabuliek).</li>
+    </li>
+    <li>Tento nástroj je užitočný pre rýchle preverenie stavu databázy a debugovanie (napr. vytvorenie a prezeranie dočasných tabuliek).</li>
 </ul>
 
 <hr>
@@ -485,16 +493,16 @@ dojde k abortu tx, ak delime nulou?
 
 <h4>Datalog</h4>
 <ul>
-	<li>Stiahnite si do jedného adresára nasledujúce súbory:
-		<ul>
-			<li><a href="03/queries_library.pl">queries_library.pl</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
-			<li><a href="03/query.pl">query.pl</a> --- pomocný súbor obsahujúci definíciu príkazu <b>q(_)</b> na formátovanie výsledkov dotazov</li>
-		</ul>
-	</li>
-	<li>Postupujte podľa pokynov v súbore <b>queries_library.pl</b>. Začnite tvorbou databázy <b>library.pl</b> (ako vzor vám poslúži <b>emp.pl</b> z predošlého cvičenia).
-	Do databázy pridávajte riadky tak, aby vám to umožnilo otestovať správnosť vašich riešení pre jednotlivé dotazy.</li>
-	<li> Môžete mať aj viac verzií databázy --- použitá databáza sa mení v riadku<br><b>:- consult('library.pl').</b></li>
-	<li>Odporúčame sústrediť sa na vyriešenie úloh 1, 3, 6, 7, 8 už počas cvičenia a úloh 10, 11, 15, 16 počas cvičenia alebo doma.</li>
+    <li>Stiahnite si do jedného adresára nasledujúce súbory:
+        <ul>
+            <li><a href="03/queries_library.pl">queries_library.pl</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
+            <li><a href="03/query.pl">query.pl</a> --- pomocný súbor obsahujúci definíciu príkazu <b>q(_)</b> na formátovanie výsledkov dotazov</li>
+        </ul>
+    </li>
+    <li>Postupujte podľa pokynov v súbore <b>queries_library.pl</b>. Začnite tvorbou databázy <b>library.pl</b> (ako vzor vám poslúži <b>emp.pl</b> z predošlého cvičenia).
+    Do databázy pridávajte riadky tak, aby vám to umožnilo otestovať správnosť vašich riešení pre jednotlivé dotazy.</li>
+    <li> Môžete mať aj viac verzií databázy --- použitá databáza sa mení v riadku<br><b>:- consult('library.pl').</b></li>
+    <li>Odporúčame sústrediť sa na vyriešenie úloh 1, 3, 6, 7, 8 už počas cvičenia a úloh 10, 11, 15, 16 počas cvičenia alebo doma.</li>
 </ul>
 
 <hr>
@@ -503,13 +511,13 @@ dojde k abortu tx, ak delime nulou?
 <h4>Datalog</h4>
 <ul>
     <li><a href="02/datalog.pdf">prezentácia</a></li>
-	<li>Stiahnite si do jedného adresára nasledujúce súbory:
-		<ul>
-			<li><a href="02/emp.pl">emp.pl</a> --- databáza zamestnancov</li>
-			<li><a href="02/queries.pl">queries.pl</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
-			<li><a href="02/query.pl">query.pl</a> --- pomocný súbor obsahujúci definíciu príkazu <b>q(_)</b> na formátovanie výsledkov dotazov</li>
-		</ul>
-	</li>
+    <li>Stiahnite si do jedného adresára nasledujúce súbory:
+        <ul>
+            <li><a href="02/emp.pl">emp.pl</a> --- databáza zamestnancov</li>
+            <li><a href="02/queries.pl">queries.pl</a> --- zoznam dotazov, ktoré máte vypracovať; tento súbor budete editovať</li>
+            <li><a href="02/query.pl">query.pl</a> --- pomocný súbor obsahujúci definíciu príkazu <b>q(_)</b> na formátovanie výsledkov dotazov</li>
+        </ul>
+    </li>
     <li>Podľa návodu z minulého cvičenia (alebo "Práca s datalogom" v <a href="02/datalog.pdf">prezentácii</a>) vyriešte úlohy v <i>queries.pl</i>.
 </ul>
 <hr>
@@ -570,11 +578,11 @@ dojde k abortu tx, ak delime nulou?
     </li>
     <li style="list-style:none;">&nbsp;</li>
     <li>Na interpretáciu datalogových dotazov budeme používať SWI-prolog: spusťte <br><b>swipl -s queries.pl</b></li>
-	<li>V inom okne editujte súbor <b>queries.pl</b>; odporúčame editory vim (pre konzolové prostredie) alebo kwrite (grafický mód, ak pracujete na lokálnom počítači v M217).
-	<li>Odporúčame mať v ďalšom okne otvorenú databázu (súbor <b>emp.pl</b> so zoznamom faktov), aby ste mohli kontrolovať výsledky dotazov.
-	<li>Po každej úprave súboru <b>queries.pl</b> (nezabudnite uložiť zmeny) spusťte v bežiacom SWI-prologu príkaz <br><b>make.</b><br> (aj s bodkou na konci, príkazy píšeme za otáznik). Preverte, či kompilátor nehlási chyby.</li>
-	<li>Výpočet dotazu (v tomto príklade pre predikát <b>job</b>) spustíme takto: <br><b>q(job(J)).</b><br> Na názve premenných nezáleží, miesto J možno použiť trebárs _, musí však sedieť arita (počet argumentov). Predikát <b>q()</b> slúži na "pekné" formátovanie výstupu a elimináciu zdanlivých duplikátov.
-	<li>Praktické rady k SWI-prologu:
+    <li>V inom okne editujte súbor <b>queries.pl</b>; odporúčame editory vim (pre konzolové prostredie) alebo kwrite (grafický mód, ak pracujete na lokálnom počítači v M217).
+    <li>Odporúčame mať v ďalšom okne otvorenú databázu (súbor <b>emp.pl</b> so zoznamom faktov), aby ste mohli kontrolovať výsledky dotazov.
+    <li>Po každej úprave súboru <b>queries.pl</b> (nezabudnite uložiť zmeny) spusťte v bežiacom SWI-prologu príkaz <br><b>make.</b><br> (aj s bodkou na konci, príkazy píšeme za otáznik). Preverte, či kompilátor nehlási chyby.</li>
+    <li>Výpočet dotazu (v tomto príklade pre predikát <b>job</b>) spustíme takto: <br><b>q(job(J)).</b><br> Na názve premenných nezáleží, miesto J možno použiť trebárs _, musí však sedieť arita (počet argumentov). Predikát <b>q()</b> slúži na "pekné" formátovanie výstupu a elimináciu zdanlivých duplikátov.
+    <li>Praktické rady k SWI-prologu:
         <ul>
             <li>Reťazce začínajúce veľkým písmenom systém pokladá za premenné. Konštanty sa začínajú malými písmenami. Ak to popletiete, bude to dávať podivne zlé výsledky.</li>
             <li>Na vyhodnocovanie aritmetických výrazov slúži operátor <b>is</b>, čiže napr. <b>X is 2+3</b>, nie <b>X = 2+3</b> (v tom druhom prípade symbol = bude interpretovaný ako unifikácia termov a nedôjde k žiadnej aritmetickej operácii).</li>
