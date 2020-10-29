@@ -1,9 +1,13 @@
 BEGIN;
-	
+
+DROP TABLE IF EXISTS city;
+
 CREATE TABLE city (
     id INTEGER PRIMARY KEY,
     name TEXT
 );
+
+DROP TABLE IF EXISTS road;
 
 CREATE TABLE road (
     id1 INTEGER,
@@ -30,7 +34,7 @@ INSERT INTO road VALUES (6, 7, 4525.34);
 INSERT INTO road VALUES (7, 8, 5818.52);
 INSERT INTO road VALUES (8, 9, 4155.44);
 
-INSERT INTO road VALUES (SELECT id2, id1, d FROM roads);
+INSERT INTO road (SELECT id2, id1, d FROM road);
 
 COMMIT;
 
