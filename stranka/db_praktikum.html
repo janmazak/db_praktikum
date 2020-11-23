@@ -53,6 +53,11 @@ Nie je potrebné riešiť všetky úlohy; kritérium je mať (aspoň ako-tak spr
 
 <h4>Query planner (EXPLAIN / ANALYZE)</h4>
 <ul>
+
+<!--
+    TODO start with a known database (emp) and inspect window functions, too:
+    explain select ename, deptno, count(empno) over (partition by deptno) from emp
+-->    
     <li>Napriek tomu, že dotazy sa formulujú v deklaratívnych jazykoch (nevieme špecifikovať postup výpočtu), možno sa relačnej databázy opýtať, aký postup bol zvolený. Toto dáva zmysel najmä v prípadoch, keď je výpočet dotazu podstatne pomalší, než by sme očakávali. Zapamätajte si však raz a navždy: v prvom rade sa vždy snažíme o <b><i>vysokú rýchlosť pochopenia zápisu dotazu ľudmi, až potom nás zaujíma rýchlosť výpočtu</i></b> (a aj to zvyčajne len pri dotazoch, ktoré sú kritické, napr. sa vykonávajú veľmi často).
     <blockquote><i><a href="https://stackify.com/premature-optimization-evil/">"Premature optimization is the root of all evil." (D. Knuth)</a></i></blockquote>
     (Aby sme však príliš nezjednodušovali, pozrite si tiež <a href="http://www.joshbarczak.com/blog/?p=580">jeden</a> či <a href="https://dl.acm.org/doi/pdf/10.1145/1569886.1513451?download=true">dva</a> ďalšie pohľady.)
@@ -257,7 +262,7 @@ dojde k abortu tx, ak delime nulou?
 <ul>
     <li>Pozrite si <a href="https://www.postgresql.org/docs/current/sql-createview.html">dokumentáciu k VIEW</a>.</li>
     <li>Pokračujeme v práci s tabuľkami vytvorenými v predošlom cvičení.</li>
-    <li>Vytvorte pohľad (VIEW), ktorý pre každého študenta a predmet, ktorý je priradený jeho triede, zobrazuje priemer známok. Záznamy by mali byť zoradené podľa mena študenta, potom podľa názvu predmetu, a nakoniec podľa priemeru známok (všetko vzostupne, čiže ASC).</li>
+    <li>Vytvorte pohľad (VIEW), ktorý pre každého študenta a predmet, ktorý je priradený jeho triede, zobrazuje priemer známok. Záznamy by mali byť zoradené podľa mena študenta, potom podľa názvu predmetu, a nakoniec podľa priemeru známok (všetko vzostupne, čiže ASC). Pozor: treba niečo zmysluplné zobraziť aj pre študentov, ktorí ešte žiadne známky nemajú.</li>
     <li>Overte, že vytvorený pohľad sa zachová aj po odhlásení a opätovnom prihlásení.</li>
     <li>Overte, že vytvorený pohľad reflektuje zmeny v podkladových dátach.</li>
 </ul>
@@ -267,6 +272,15 @@ dojde k abortu tx, ak delime nulou?
 
 <h4>DDL, DML</h4>
 <ul>
+<!--
+TODO naming conventions (ako pomenovat tabulku, slpce, odkazy na id)
+ako reprezentovat 1:N, M:N
+vyhybat sa redundancii (az neskor optimalizovat vykon pridanim redundancie)
+
+plus link na nejaky obsiahlejsi priklad databazy, kde si mozu pozriet,
+ako robit primarne kluce atd.
+-->
+
     <li><a href="08/ddl.pdf">prezentácia</a></li>
     <li>Postgres dokumentácia:
         <ul>
@@ -342,6 +356,8 @@ dojde k abortu tx, ak delime nulou?
     </li>
 </ul>
 
+<!-- TODO pridat median, 10% najlepsie zarabajucich, urovne riadenia vo firme (da sa pouzit dense_rank?) -->
+
 <h4>Prístupové práva</h4>
 <ul>
     <li>dokumentácia: <a href="https://www.postgresql.org/docs/current/sql-grant.html">GRANT</a>, <a href="https://www.postgresql.org/docs/current/sql-revoke.html">REVOKE</a></li>
@@ -373,7 +389,7 @@ dojde k abortu tx, ak delime nulou?
     <li>Napíšte rekurzívny dotaz, ktorý vypočíta hodnotu n! (faktoriál) pre n = 10.</li>
     <li>Napíšte rekurzívny dotaz, ktorý vypočíta hodnotu 30. Fibonacciho čísla.</li>
     <li>Uvažujme databázu zamestnancov, ktorú sme používali na predošlých cvičeniach. Nájdite ku každému manažérovi zoznam jeho podriadených a ku každému podriadenému uveďte, či je priamy alebo nepriamy.</li>
-    <li>Vytvorte si databázu ciest medzi mestami (<a href="06/world.sql">roads.sql</a>, importovať ju možno príkazom <tt>psql -f roads.sql</tt>) a napíšte dotaz, ktorý zistí, 
+    <li>Vytvorte si databázu ciest medzi mestami (<a href="06/world.sql">roads.sql</a>, importovať ju možno príkazom <code>psql -f roads.sql</code>) a napíšte dotaz, ktorý zistí,
         <ol>
             <li>odkiaľ sa dá dostať do Ríma;</li>
             <li>odkiaľ sa dá dostať do Ríma po prejdení najviac 1000 km.</li>
